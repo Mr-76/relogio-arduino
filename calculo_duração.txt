@@ -1,0 +1,13 @@
+Estou usando uma bateria de celular de 2600 mah >>) foi dps de trocar a beteria do celular entao essa sobrou , enfim
+para calculo da duração procurei na net algo do tipo e encontrei o mais 'consistente' pela duração do relogio ate agora , a formula seria 
+HORAS = (mAH)/(A*1000) 
+OU
+HORAS = Mah*Volts/Wattss*1000 
+
+infelismente ainda nao sei exeplicar muito bem a formula 
+
+a bateria usa 3.83 volts como o circuito esta em paralelo tudo esta na msms voltagem
+a corrente normal é 0.04A no maximo 0.05 quando o laser é usado ou quando o transmissor é usado >:)
+segundo a formula a bateria deixaria o  relogio funcionando por 65 horas >: cenario ideal claro 
+mais testes vao ser usados pra verificar
+lembrado que a bateria nesse relogio é viciada :(

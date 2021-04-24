@@ -1,0 +1,11 @@
+https://autocorerobotica.blog.br/relogio-com-o-modulo-tm1637-e-arduino/
+https://br-arduino.org/2015/09/arduino-interrupcoes-relogio.html
+https://arduinoproyek.wordpress.com/digital-clock/
+https://www.arduino.cc/en/Tutorial/BuiltInExamples/Button
+
+https://create.arduino.cc/projecthub/yashastronomy/diy-infrared-heart-beat-sensor-using-arduino-7db9c8
+https://electropeak.com/learn/make-a-digital-multimeter-with-arduino/
+https://forum.arduino.cc/index.php?topic=703874.0
+https://forum.arduino.cc/index.php?topic=210803.0
+
+gps ; https://www.movable-type.co.uk/scripts/latlong.html
