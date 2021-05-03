@@ -187,7 +187,7 @@ if (botaodata == HIGH){
 gps_ativar = 0;
 }
 display.setBrightness(0x0c);
-display.showNumberDec(4444, false);
+display.showNumberDec(soma, false);
 
  while (gpsSerial.available() > 0){
     
