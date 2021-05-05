@@ -1,4 +1,4 @@
- //novo codigo reles
+//novo codigo reles
 
 //////////////////////////////////////////////////////////////////////////////////
 #include <TM1637Display.h>
@@ -144,6 +144,7 @@ cronometro();
 
 
 
+
 if (botao_alarme == HIGH) {
   alarme_cria();
 }
@@ -211,7 +212,7 @@ delay(500);
 
 void cronometro(){
 
-if (counter > 1){
+if (counter > 2){
     minutos1 = ((minutos+(hora*60))*60)+(segundos);
     minutost = (minutos1 - minutos0);
     display.setBrightness(0x0c);
@@ -229,10 +230,11 @@ if (counter > 1){
     minutos1 = 0;
     }
     
-   else{
+   if (counter == 1){
    minutos0 = (((minutos+(hora*60))*60)+(segundos));
    display.setBrightness(0x0c);
    display.showNumberDec(100, false);
+   counter += 1;
    delay(500);
    }
   
@@ -444,5 +446,5 @@ display.showNumberDec(soma, false);
     Serial.println("Location: Not Available");
   }
 
+
 }
-                                                     
