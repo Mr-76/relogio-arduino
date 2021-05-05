@@ -175,31 +175,20 @@ gps_ativar += 1;
 
 }
 
-while (gps_ativar == 1){
-
-botaodata = digitalRead(bPin9); // sair do loop 
-
-if (botaodata == HIGH){
-delay(3000);
-gps_ativar = 0;
-}
-
-display.setBrightness(0x0c);
+if (gps_ativar > 0){
+display.setBrightness(0x0c);// isso fala pra vc que o loop esta funcioando __ aFIM DE TESTES
 display.showNumberDec(soma, false);
+delay(500);
 
  while (gpsSerial.available() > 0){ // testar dps se o serial é da conecção dos satelites
-    
-     if (gps.encode(gpsSerial.read())){
-      displayInfo();
-    
-     botaodata = digitalRead(bPin9);
-    
+     botaodata = digitalRead(bPin9); // sair do loop :>
      if (botaodata == HIGH){
      delay(1000);
      gps_ativar = 0;
      break;
-    }
-    
+     }
+     if (gps.encode(gpsSerial.read())){
+      displayInfo();
     
     }
 
@@ -364,7 +353,7 @@ if (cont == 0){
   }
 
 if (cont >= 1){
-  delay(10000);
+delay(10000);
 lat2 = lat11;
 
 lon2 = lon11;
@@ -392,7 +381,7 @@ display.showNumberDec(soma, false);
 
   Serial.println("satelites");
   Serial.println(gps.satellites.value());
-Serial.println(gps.satellites.value());
+  Serial.println(gps.satellites.value());
   delay(1000);
   lat0 = lat2;
   lon0 = lon2;
@@ -407,4 +396,4 @@ Serial.println(gps.satellites.value());
   }
 
 }
-                                                
+                                                     
