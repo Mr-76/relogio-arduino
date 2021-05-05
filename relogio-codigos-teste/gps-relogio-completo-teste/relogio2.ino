@@ -96,7 +96,7 @@ pinMode(bPin9, INPUT);
 pinMode(bPin8, INPUT);
 pinMode(bPin7, INPUT);
 pinMode(bPin6, INPUT);
-pinMode(pinolaser, OUTPUT);
+pinMode(pinolaser, OUTPUT);// tirar
 
 
 }
@@ -104,7 +104,7 @@ void loop () {
 
   
   DateTime now = rtc.now();
-  Serial.print(now.year(), DEC);
+/*  Serial.print(now.year(), DEC);
   Serial.print('/');
   Serial.print(now.month(), DEC);
   Serial.print('/');
@@ -112,12 +112,14 @@ void loop () {
   Serial.print(" (");
   Serial.print(daysOfTheWeek[now.dayOfTheWeek()]);
   Serial.print(") ");
-  Serial.print(now.hour(), DEC);
-  Serial.print(':');
-  Serial.print(now.minute(), DEC);
-  Serial.print(':');
-  Serial.print(now.second(), DEC);
-  Serial.println();
+//  Serial.print(now.hour(), DEC);
+// Serial.print(':');
+//  Serial.print(now.minute(), DEC);
+//  Serial.print(':');
+//  Serial.print(now.second(), DEC);
+
+Serial.println();
+*/
 
   DateTime future (now + TimeSpan(7, 12, 30, 6));
   
@@ -168,33 +170,32 @@ delay(500);
   botao_transmissor = digitalRead(bPin6);
 
 if (botaodata == HIGH) {
+delay(3000);
 gps_ativar += 1;
-delay(4000);
+
 }
 
 while (gps_ativar == 1){
-botaodata = digitalRead(bPin9); // pq os while loops >: com read pois esses codigos fora do while so sao feitos uma vez entao nao 
-  //mudam a nao ser que vc mande ele ler novamente
 
-  botaocronometro = digitalRead(bPin8);
-
-  botao_alarme = digitalRead(bPin7);
-
-  botao_transmissor = digitalRead(bPin6);
-
+botaodata = digitalRead(bPin9); // sair do loop 
 
 if (botaodata == HIGH){
+delay(3000);
 gps_ativar = 0;
 }
+
 display.setBrightness(0x0c);
 display.showNumberDec(soma, false);
 
- while (gpsSerial.available() > 0){
+ while (gpsSerial.available() > 0){ // testar dps se o serial é da conecção dos satelites
     
-    if (gps.encode(gpsSerial.read())){
+     if (gps.encode(gpsSerial.read())){
       displayInfo();
-    botaodata = digitalRead(bPin9);
-    if (botaodata == HIGH){
+    
+     botaodata = digitalRead(bPin9);
+    
+     if (botaodata == HIGH){
+     delay(1000);
      gps_ativar = 0;
      break;
     }
@@ -203,9 +204,6 @@ display.showNumberDec(soma, false);
     }
 
 }
-
-
-
 
 }
 
