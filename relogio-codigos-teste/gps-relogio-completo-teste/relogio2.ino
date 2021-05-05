@@ -103,7 +103,65 @@ pinMode(pinolaser, OUTPUT);// tirar
 void loop () {
 
   
-  DateTime now = rtc.now();
+DateTime now = rtc.now();
+
+DateTime future (now + TimeSpan(7, 12, 30, 6));
+
+
+print_data_hora(); // bando de serial print >:D
+
+mostrar_tempo(); // mostra hora no display
+
+
+if (alarme == 1){
+alarme_checa(); // função alarme 
+}
+delay(500);
+
+botaodata = digitalRead(bPin9);
+botaocronometro = digitalRead(bPin8);
+botao_alarme = digitalRead(bPin7);
+botao_transmissor = digitalRead(bPin6);
+
+
+if (botaodata == HIGH) {
+delay(3000);
+gps_ativar += 1;
+}
+
+
+gps_ativo(); // gps trabalhando
+
+
+
+
+
+if (botaocronometro == HIGH){
+   counter += 1;
+}  
+
+cronometro();
+
+
+
+if (botao_alarme == HIGH) {
+  alarme_cria();
+}
+  
+  
+if (botao_transmissor == HIGH){
+    mySwitch.send("1011110001111111100100010101");
+    display.setBrightness(0x0f);
+    display.showNumberDec(3, false);
+    delay(300);
+  }
+}
+
+
+
+
+void print_data_hora(){
+
 /*  Serial.print(now.year(), DEC);
   Serial.print('/');
   Serial.print(now.month(), DEC);
@@ -121,59 +179,10 @@ void loop () {
 Serial.println();
 */
 
-  DateTime future (now + TimeSpan(7, 12, 30, 6));
-  
-segundos = int(now.second());
-minutos = int(now.minute());
-hora = int(now.hour());
-
-
-if (alarme == 1){
-  
- if ((horaA == hora) and (minutosA == minutos)){
- digitalWrite(pinolaser,HIGH);
- delay(500);
- digitalWrite(pinolaser,LOW);
- delay(500);
- digitalWrite(pinolaser,HIGH);
- delay(500);
- digitalWrite(pinolaser,LOW);
- delay(500);
-  digitalWrite(pinolaser,HIGH);
- delay(500);
- digitalWrite(pinolaser,LOW);
- delay(500);
-  digitalWrite(pinolaser,HIGH);
- delay(500);
- digitalWrite(pinolaser,LOW);
- delay(500);
- alarme = 0;
- horaA = 0;
- minutosA =0;
-  }
-}
-
-
- 
-display.setBrightness(0x0b);
-
-display.showNumberDecEx(minutos,0,true,2, 2);//deixa qual lado separado por : 
-display.showNumberDecEx(hora,0b01000000, true, 2, 0);
-delay(500);
-
-  botaodata = digitalRead(bPin9);
-
-  botaocronometro = digitalRead(bPin8);
-
-  botao_alarme = digitalRead(bPin7);
-  
-  botao_transmissor = digitalRead(bPin6);
-
-if (botaodata == HIGH) {
-delay(3000);
-gps_ativar += 1;
 
 }
+
+void gps_ativo(){
 
 if (gps_ativar > 0){
 display.setBrightness(0x0c);// isso fala pra vc que o loop esta funcioando __ aFIM DE TESTES
@@ -198,20 +207,21 @@ delay(500);
 
 
 
+}
 
-if (botaocronometro == HIGH){
-   counter += 1;
-  if (counter > 1){
+void cronometro(){
+
+if (counter > 1){
     minutos1 = ((minutos+(hora*60))*60)+(segundos);
     minutost = (minutos1 - minutos0);
     display.setBrightness(0x0c);
-    display.showNumberDec(minutost, false);
+    display.showNumberDec(minutost, false); // mostra em segundos
     delay(700);
     display.setBrightness(0x0c);
-    display.showNumberDec(minutost/60, false);
+    display.showNumberDec(minutost/60, false);// mostra em minutors
     delay(700);
     display.setBrightness(0x0c);
-    display.showNumberDec(minutost/3600, false);
+    display.showNumberDec(minutost/3600, false);// mostra em horas
     delay(700);
     counter = 0;
     minutost = 0;
@@ -225,11 +235,14 @@ if (botaocronometro == HIGH){
    display.showNumberDec(100, false);
    delay(500);
    }
-  }
   
 
 
-if (botao_alarme == HIGH) {
+
+}
+
+void alarme_cria(){
+
   display.setBrightness(0x0c);
   display.showNumberDec(1111, false);
   delay(500);
@@ -240,9 +253,8 @@ if (botao_alarme == HIGH) {
   horaA = hora;
   minutosA = minutos;
   delay(1000);
-  }
-  
-  while (dowhile == 1){
+ 
+ while (dowhile == 1){
     
   botaodata = digitalRead(bPin9); // pq os while loops >: com read pois esses codigos fora do while so sao feitos uma vez entao nao 
   //mudam a nao ser que vc mande ele ler novamente
@@ -314,16 +326,53 @@ if (botao_alarme == HIGH) {
     alarme = 1;
     } 
     }
- 
-  
-  
 
-if (botao_transmissor == HIGH){
-    mySwitch.send("1011110001111111100100010101");
-    display.setBrightness(0x0f);
-    display.showNumberDec(3, false);
-    delay(300);
+
+}
+
+void mostrar_tempo(){
+
+DateTime now = rtc.now();
+
+DateTime future (now + TimeSpan(7, 12, 30, 6));
+
+
+segundos = int(now.second());
+minutos = int(now.minute());
+hora = int(now.hour());
+
+display.setBrightness(0x0b);
+display.showNumberDecEx(minutos,0,true,2, 2);//deixa qual lado separado por : 
+display.showNumberDecEx(hora,0b01000000, true, 2, 0);
+
+}
+
+
+void alarme_checa(){
+ if ((horaA == hora) and (minutosA == minutos)){
+ digitalWrite(pinolaser,HIGH);
+ delay(500);
+ digitalWrite(pinolaser,LOW);
+ delay(500);
+ digitalWrite(pinolaser,HIGH);
+ delay(500);
+ digitalWrite(pinolaser,LOW);
+ delay(500);
+  digitalWrite(pinolaser,HIGH);
+ delay(500);
+ digitalWrite(pinolaser,LOW);
+ delay(500);
+  digitalWrite(pinolaser,HIGH);
+ delay(500);
+ digitalWrite(pinolaser,LOW);
+ delay(500);
+ alarme = 0;
+ horaA = 0;
+ minutosA =0;
   }
+
+
+
 }
 
 
