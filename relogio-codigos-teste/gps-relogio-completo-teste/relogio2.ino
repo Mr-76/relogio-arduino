@@ -1,4 +1,4 @@
- //novo codigo reles
+//novo codigo reles
 
 //////////////////////////////////////////////////////////////////////////////////
 #include <TM1637Display.h>
@@ -96,15 +96,74 @@ pinMode(bPin9, INPUT);
 pinMode(bPin8, INPUT);
 pinMode(bPin7, INPUT);
 pinMode(bPin6, INPUT);
-pinMode(pinolaser, OUTPUT);
+pinMode(pinolaser, OUTPUT);// tirar
 
 
 }
 void loop () {
 
   
-  DateTime now = rtc.now();
-  Serial.print(now.year(), DEC);
+DateTime now = rtc.now();
+
+DateTime future (now + TimeSpan(7, 12, 30, 6));
+
+
+print_data_hora(); // bando de serial print >:D
+
+mostrar_tempo(); // mostra hora no display
+
+
+if (alarme == 1){
+alarme_checa(); // função alarme 
+}
+delay(500);
+
+botaodata = digitalRead(bPin9);
+botaocronometro = digitalRead(bPin8);
+botao_alarme = digitalRead(bPin7);
+botao_transmissor = digitalRead(bPin6);
+
+
+if (botaodata == HIGH) {
+delay(3000);
+gps_ativar += 1;
+}
+
+
+gps_ativo(); // gps trabalhando
+
+
+
+
+
+if (botaocronometro == HIGH){
+   counter += 1;
+}  
+
+cronometro();
+
+
+
+
+if (botao_alarme == HIGH) {
+  alarme_cria();
+}
+  
+  
+if (botao_transmissor == HIGH){
+    mySwitch.send("1011110001111111100100010101");
+    display.setBrightness(0x0f);
+    display.showNumberDec(3, false);
+    delay(300);
+  }
+}
+
+
+
+
+void print_data_hora(){
+
+/*  Serial.print(now.year(), DEC);
   Serial.print('/');
   Serial.print(now.month(), DEC);
   Serial.print('/');
@@ -112,119 +171,58 @@ void loop () {
   Serial.print(" (");
   Serial.print(daysOfTheWeek[now.dayOfTheWeek()]);
   Serial.print(") ");
-  Serial.print(now.hour(), DEC);
-  Serial.print(':');
-  Serial.print(now.minute(), DEC);
-  Serial.print(':');
-  Serial.print(now.second(), DEC);
-  Serial.println();
+//  Serial.print(now.hour(), DEC);
+// Serial.print(':');
+//  Serial.print(now.minute(), DEC);
+//  Serial.print(':');
+//  Serial.print(now.second(), DEC);
 
-  DateTime future (now + TimeSpan(7, 12, 30, 6));
-  
-segundos = int(now.second());
-minutos = int(now.minute());
-hora = int(now.hour());
+Serial.println();
+*/
 
 
-if (alarme == 1){
-  
- if ((horaA == hora) and (minutosA == minutos)){
- digitalWrite(pinolaser,HIGH);
- delay(500);
- digitalWrite(pinolaser,LOW);
- delay(500);
- digitalWrite(pinolaser,HIGH);
- delay(500);
- digitalWrite(pinolaser,LOW);
- delay(500);
-  digitalWrite(pinolaser,HIGH);
- delay(500);
- digitalWrite(pinolaser,LOW);
- delay(500);
-  digitalWrite(pinolaser,HIGH);
- delay(500);
- digitalWrite(pinolaser,LOW);
- delay(500);
- alarme = 0;
- horaA = 0;
- minutosA =0;
-  }
 }
 
+void gps_ativo(){
 
- 
-display.setBrightness(0x0b);
-
-display.showNumberDecEx(minutos,0,true,2, 2);//deixa qual lado separado por : 
-display.showNumberDecEx(hora,0b01000000, true, 2, 0);
+if (gps_ativar > 0){
+display.setBrightness(0x0c);// isso fala pra vc que o loop esta funcioando __ aFIM DE TESTES
+display.showNumberDec(soma, false);
 delay(500);
 
-  botaodata = digitalRead(bPin9);
-
-  botaocronometro = digitalRead(bPin8);
-
-  botao_alarme = digitalRead(bPin7);
-  
-  botao_transmissor = digitalRead(bPin6);
-
-if (botaodata == HIGH) {
-gps_ativar += 1;
-delay(4000);
-}
-
-while (gps_ativar == 1){
-botaodata = digitalRead(bPin9); // pq os while loops >: com read pois esses codigos fora do while so sao feitos uma vez entao nao 
-  //mudam a nao ser que vc mande ele ler novamente
-
-  botaocronometro = digitalRead(bPin8);
-
-  botao_alarme = digitalRead(bPin7);
-
-  botao_transmissor = digitalRead(bPin6);
-
-
-if (botaodata == HIGH){
-gps_ativar = 0;
-}
-display.setBrightness(0x0c);
-display.showNumberDec(soma, false);
-
- while (gpsSerial.available() > 0){
-    
-    if (gps.encode(gpsSerial.read())){
-      displayInfo();
-    botaodata = digitalRead(bPin9);
-    if (botaodata == HIGH){
+ while (gpsSerial.available() > 0){ // testar dps se o serial é da conecção dos satelites
+     botaodata = digitalRead(bPin9); // sair do loop :>
+     if (botaodata == HIGH){
+     delay(1000);
      gps_ativar = 0;
      break;
-    }
-    
+     }
+     if (gps.encode(gpsSerial.read())){
+      displayInfo();
     
     }
 
 }
 
+}
 
 
 
 }
 
+void cronometro(){
 
-
-
-if (botaocronometro == HIGH){
-   counter += 1;
-  if (counter > 1){
+if (counter > 2){
     minutos1 = ((minutos+(hora*60))*60)+(segundos);
     minutost = (minutos1 - minutos0);
     display.setBrightness(0x0c);
-    display.showNumberDec(minutost, false);
+    display.showNumberDec(minutost, false); // mostra em segundos
     delay(700);
     display.setBrightness(0x0c);
-    display.showNumberDec(minutost/60, false);
+    display.showNumberDec(minutost/60, false);// mostra em minutors
     delay(700);
     display.setBrightness(0x0c);
-    display.showNumberDec(minutost/3600, false);
+    display.showNumberDec(minutost/3600, false);// mostra em horas
     delay(700);
     counter = 0;
     minutost = 0;
@@ -232,17 +230,21 @@ if (botaocronometro == HIGH){
     minutos1 = 0;
     }
     
-   else{
+   if (counter == 1){
    minutos0 = (((minutos+(hora*60))*60)+(segundos));
    display.setBrightness(0x0c);
    display.showNumberDec(100, false);
+   counter += 1;
    delay(500);
    }
-  }
   
 
 
-if (botao_alarme == HIGH) {
+
+}
+
+void alarme_cria(){
+
   display.setBrightness(0x0c);
   display.showNumberDec(1111, false);
   delay(500);
@@ -253,9 +255,8 @@ if (botao_alarme == HIGH) {
   horaA = hora;
   minutosA = minutos;
   delay(1000);
-  }
-  
-  while (dowhile == 1){
+ 
+ while (dowhile == 1){
     
   botaodata = digitalRead(bPin9); // pq os while loops >: com read pois esses codigos fora do while so sao feitos uma vez entao nao 
   //mudam a nao ser que vc mande ele ler novamente
@@ -327,16 +328,53 @@ if (botao_alarme == HIGH) {
     alarme = 1;
     } 
     }
- 
-  
-  
 
-if (botao_transmissor == HIGH){
-    mySwitch.send("1011110001111111100100010101");
-    display.setBrightness(0x0f);
-    display.showNumberDec(3, false);
-    delay(300);
+
+}
+
+void mostrar_tempo(){
+
+DateTime now = rtc.now();
+
+DateTime future (now + TimeSpan(7, 12, 30, 6));
+
+
+segundos = int(now.second());
+minutos = int(now.minute());
+hora = int(now.hour());
+
+display.setBrightness(0x0b);
+display.showNumberDecEx(minutos,0,true,2, 2);//deixa qual lado separado por : 
+display.showNumberDecEx(hora,0b01000000, true, 2, 0);
+
+}
+
+
+void alarme_checa(){
+ if ((horaA == hora) and (minutosA == minutos)){
+ digitalWrite(pinolaser,HIGH);
+ delay(500);
+ digitalWrite(pinolaser,LOW);
+ delay(500);
+ digitalWrite(pinolaser,HIGH);
+ delay(500);
+ digitalWrite(pinolaser,LOW);
+ delay(500);
+  digitalWrite(pinolaser,HIGH);
+ delay(500);
+ digitalWrite(pinolaser,LOW);
+ delay(500);
+  digitalWrite(pinolaser,HIGH);
+ delay(500);
+ digitalWrite(pinolaser,LOW);
+ delay(500);
+ alarme = 0;
+ horaA = 0;
+ minutosA =0;
   }
+
+
+
 }
 
 
@@ -366,7 +404,7 @@ if (cont == 0){
   }
 
 if (cont >= 1){
-  delay(10000);
+delay(10000);
 lat2 = lat11;
 
 lon2 = lon11;
@@ -394,7 +432,7 @@ display.showNumberDec(soma, false);
 
   Serial.println("satelites");
   Serial.println(gps.satellites.value());
-Serial.println(gps.satellites.value());
+  Serial.println(gps.satellites.value());
   delay(1000);
   lat0 = lat2;
   lon0 = lon2;
@@ -408,5 +446,5 @@ Serial.println(gps.satellites.value());
     Serial.println("Location: Not Available");
   }
 
+
 }
-                                                
