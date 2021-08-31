@@ -88,19 +88,22 @@ void loop () {
     Serial.println();
 
 
-String horas = String((int)now.hour());
-String minutos = String((int)now.minute());
+//String horas = 
+String minutos = String((int)now.minute());  
 String segundos = String((int)now.second());
-String hora = horas + ":"+minutos+":"+segundos;
+String hora = horas+':';
 Serial.println();
-delay(3000);
+delay(200);
 display.setTextSize(1);
 display.setTextColor(WHITE);
-display.setCursor(0,28);
-  
-  display.println(hora);
-  
+display.setCursor(0,10);
+display.print((int)now.hour(), DEC) ;
+display.print(":");
+display.print((int)now.minute(),DEC);
+display.print(":");
+display.print((int)now.second(),DEC);
+
   display.display();
-  delay(5000);
+  delay(1000);
   display.clearDisplay();
 }
