@@ -1,0 +1,6 @@
+#referencia para uso de energia do arduino
+usar um pro mini vai de 20ma a 40 ma
+usando uma bateria lipo de 1800mah temos 1800mah/20ma = 60hrs
+testar modo de sleep mode
+
+
