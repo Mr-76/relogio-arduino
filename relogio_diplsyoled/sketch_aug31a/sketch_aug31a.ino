@@ -1,5 +1,8 @@
 // Date and time functions using a DS1307 RTC connected via I2C and Wire lib
-
+#define IR_RECEIVE_PIN  2
+#define IR_SEND_PIN          2
+#include <Arduino.h>
+#include <IRremote.h>
 #include "RTClib.h"
 #include <SPI.h>
 #include <Wire.h>
@@ -19,6 +22,12 @@ char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursd
 void setup () {
   
   Serial.begin(9600);
+  IrSender.begin(IR_SEND_PIN, ENABLE_LED_FEEDBACK); // Specify send pin and enable feedback LED at default feedback LED pin
+ Serial.print(F("Ready to send IR signals at pin "));
+ Serial.println(IR_SEND_PIN);
+  IrReceiver.begin(IR_RECEIVE_PIN, ENABLE_LED_FEEDBACK, USE_DEFAULT_FEEDBACK_LED_PIN);
+  Serial.print(F("Ready to receive IR signals at pin "));
+  Serial.println(IR_RECEIVE_PIN);
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C); 
   pinMode(pinodisplay, INPUT);
   pinMode(pinosniffer, INPUT); 
@@ -27,9 +36,24 @@ void setup () {
   inicializartc();
   //mySwitch.enableReceive(0);
 }
+
+uint16_t sAddress = 0xB;
+uint8_t sCommand = 0xA;
+uint8_t sRepeats = 1;
+
+uint16_t ssAddress = 0xBF00;
+uint8_t ssCommand = 0x3;
+uint8_t ssRepeats = 1;
+
+//uint16_t ssAddress = 0x707;
+//uint8_t ssCommand = 0x2;
+//uint8_t ssRepeats = 1;
+
  
 void loop () {
   DateTime now = rtc.now();
+  reciver();
+  sender();
  snifferrf(pinosniffer);
  ligadesliga(pinodisplay);
  
@@ -139,7 +163,30 @@ int ligadesliga(int pino){
   }}
   
   
-  
+    void reciver(){
+      //adicinar pino de teste
+    if (IrReceiver.decode()) {
+
+        // Print a short summary of received data
+        IrReceiver.printIRResultShort(&Serial);
+        if (IrReceiver.decodedIRData.protocol == UNKNOWN) {
+            // We have an unknown protocol here, print more info
+            IrReceiver.printIRResultRawFormatted(&Serial, true);
+        }
+        Serial.println();
+
+        IrReceiver.resume(); // Enable receiving of the next value 
+    }}
+
+    void sender(){
+      
+      IrSender.sendNEC(sAddress, sCommand, sRepeats);
+   delay(1000);
+   IrSender.sendNEC(ssAddress, ssCommand, ssRepeats);
+   delay(1000);
+      
+      
+      }
   
 
 
