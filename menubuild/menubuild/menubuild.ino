@@ -9,19 +9,13 @@ when counter hits 3 it shoud stop and open an exception so counter = 0 and nextc
 nexetcouter as 0, if u decrement less then 0 if count = 0 in decrement check say hEY u cant  coutner = 0 next couter = 0 and reset continue
 better to ignore the input in decremtn with counter == 0
 
+
+
 */
-
-
-
-
-
-
-
-
-
-
-
-
+// modos de desligar e ligar o display
+//deixar display mostar 'nada' display.println(); pode funcionar tb
+//display.oled_command(SSD1305_DISPLAYOFF);
+//display.oled_command(SSD1305_DISPLAYON);
 
 
 #include <SPI.h>
@@ -36,8 +30,8 @@ int buttonState3 = 0;
 int menucounter = 0;
 //v- voltage,a- alarm,rf -radio freq, ir - infrared
 //definitions for initial colors in the display
-int vword = 1;//these are the equivalent to black and white tho the word colors and the back light
-int vback = 0;    
+int vword = 1;//these are the equivalent to black and white to the word colors and the back light color 
+int vback = 0;  
 int aword = 1;
 int aback = 0;
 int irword = 1;
@@ -45,9 +39,25 @@ int irback = 0;
 int rfword = 0;
 int rfback = 1;    
 
+int array_botoes[4][2] = {{0,1},{1,0},{0,1},{0,1}};
+/*                    
+ *  int volts[1][2] = {0,0};
+    
+    int array_botoes[4][2] = {{0,1},{1,0},{0,1},{0,1}};
+    
+    vword = array_botoes[0][0];-----------menos codigo
+    vback = array_botoes[0][1];       qual usar ?
+    
+    volts[0][0]=array_botoes[0][0];---------mais organizado
+    volts[0][1]=array_botoes[0][1];
+                      
+*/
+
+
 const int buttonPin1 = 2;  //decrements menucounter
 const int buttonPin2 = 3; // selects the menu 
 const int buttonPin3 = 4;  //increments menucounter
+
 void setup()   
 {          
   pinMode(buttonPin1, INPUT);
