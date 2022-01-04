@@ -22,7 +22,6 @@ better to ignore the input in decremtn with counter == 0
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
-// 0 is black and 1 is white
 Adafruit_SSD1306 display(-1);
 int buttonState1 = 0;
 int buttonState2 = 0;
@@ -35,21 +34,6 @@ int array_botoes[4][2] = {
   {0,1},
   {0,1}
 };
-
-//v- voltage,a- alarm,rf -radio freq, ir - infrared
-//definitions for initial colors in the display
-int vword = array_botoes[3][1];//these are the equivalent to black and white to the word colors and the back light color 
-int vback = array_botoes[3][0];  
-
-int aword = array_botoes[2][1];
-int aback = array_botoes[2][0];
-
-int irword = array_botoes[1][1];
-int irback = array_botoes[1][0];
-
-int rfword = array_botoes[0][1];
-int rfback = array_botoes[0][0];    
-
 
 const int buttonPin1 = 2;  //decrements menucounter
 const int buttonPin2 = 3; // selects the menu 
@@ -70,7 +54,7 @@ void setup()
 
 
 void loop() {
- 
+
   
   buttonState1 = digitalRead(buttonPin1);
   buttonState2 = digitalRead(buttonPin2);
@@ -108,47 +92,32 @@ void loop() {
   		array_botoes[(menucounter - 1)][0] = 0;
   		array_botoes[(menucounter - 1)][1] = 1;
       
-
     }  
   
   }
     
-   //definitions for initial colors in the display
-  vword = array_botoes[3][1];//these are the equivalent to black and white to the word colors and the back light color 
-  vback = array_botoes[3][0];  
-
-  aword = array_botoes[2][1];
-  aback = array_botoes[2][0];
-
-  irword = array_botoes[1][1];
-  irback = array_botoes[1][0];
-
-  rfword = array_botoes[0][1];
-  rfback = array_botoes[0][0];  
-
-  display.clearDisplay();
 
   // Display Text
   display.setTextSize(1); 
-  display.setTextColor(rfword, rfback);
+  display.setTextColor(array_botoes[0][1], array_botoes[0][0]);
   display.setCursor(0,0);
   display.println("RF");
   display.display();
  
 
-  display.setTextColor(irword, irback); 
+  display.setTextColor(array_botoes[1][1], array_botoes[1][0]); 
   display.setCursor(0,9);
   display.println("INFRA RED");
   display.display();
   
 
-  display.setTextColor(aword, aback); 
+  display.setTextColor(array_botoes[2][1], array_botoes[2][0]); 
   display.setCursor(0,18);
   display.println("ALARM");
   display.display();
  
 
-  display.setTextColor(vword, vback); 
+  display.setTextColor(array_botoes[3][1], array_botoes[3][0]); 
   display.setCursor(0,27);
   display.println("VOLTAGE");
   display.display();
