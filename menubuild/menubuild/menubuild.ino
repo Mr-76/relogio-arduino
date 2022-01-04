@@ -104,13 +104,15 @@ if (buttonState1 == HIGH) {
       if (buttonState1 == HIGH && buttonState3 == HIGH){
         menucounter = 0;
         break;
-        
-        
         }
+
+        
   if (menucounter > 3 || menucounter < 0){
   menucounter = 0;
   }
+  
 //create a functin menu1(menucounter)
+ 
  if (menucounter == 0){
    vword = 1;
    vback = 0;    

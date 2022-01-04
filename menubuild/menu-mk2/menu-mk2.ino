@@ -28,7 +28,14 @@ int buttonState1 = 0;
 int buttonState2 = 0;
 int buttonState3 = 0;
 int menucounter = 0;
-int array_botoes[4][2] = {{1,0},{0,1},{0,1},{0,1}};
+
+int array_botoes[4][2] = {
+  {1,0},
+  {0,1},
+  {0,1},
+  {0,1}
+};
+
 //v- voltage,a- alarm,rf -radio freq, ir - infrared
 //definitions for initial colors in the display
 int vword = array_botoes[3][1];//these are the equivalent to black and white to the word colors and the back light color 
@@ -42,6 +49,7 @@ int irback = array_botoes[1][0];
 
 int rfword = array_botoes[0][1];
 int rfback = array_botoes[0][0];    
+
 
 const int buttonPin1 = 2;  //decrements menucounter
 const int buttonPin2 = 3; // selects the menu 
@@ -62,90 +70,85 @@ void setup()
 
 
 void loop() {
-buttonState1 = digitalRead(buttonPin1);
-buttonState2 = digitalRead(buttonPin2);
-buttonState3 = digitalRead(buttonPin3);
-
-if (buttonState1 == HIGH) {
-menucounter -= 1;
-if (menucounter < 0){
-menucounter = 0;
-continue;
-}
-
-else{
-array_botoes[menucounter][0] = 1;
-array_botoes[menucounter][1] = 0;
-
-array_botoes[(menucounter + 1)][0] = 0;
-array_botoes[(menucounter +1)][1] = 1;
-
-}  
-  }
-
-  if (buttonState3 == HIGH) {
-	menucounter += 1;
-	if(menucounter > 3){
-		menucounter = 3;
-		continue;
-	}
-	
-	
-	else{
-		array_botoes[menucounter][0] = 1;
-		array_botoes[menucounter][1] = 0;
-
-		array_botoes[(menucounter - 1)][0] = 0;
-		array_botoes[(menucounter - 1)][1] = 1;
-	     }  
-}
-  
-  if (buttonState2 == HIGH) { 
-    //selct a menu
-  }
  
   
+  buttonState1 = digitalRead(buttonPin1);
+  buttonState2 = digitalRead(buttonPin2);
+  buttonState3 = digitalRead(buttonPin3);
 
-if (menucounter > 3 || menucounter < 0){
-  menucounter = 0;
+  if (buttonState1 == HIGH) {
+    menucounter -= 1;
+  if (menucounter < 0){
+    menucounter = 0;
   }
-
- if (menucounter == 0){
-   vword = 1;
-   vback = 0;    
-   aword = 1;
-   aback = 0;
-   irword = 1;
-   irback = 0;
-   rfword = 0;
-   rfback = 1;  
-   
-   delay(500);
   
+  else{
+  array_botoes[menucounter][0] = 1;
+  array_botoes[menucounter][1] = 0;
+  
+  array_botoes[(menucounter + 1)][0] = 0;
+  array_botoes[(menucounter +1)][1] = 1;
+  
+  }  
+    }
+  
+    if (buttonState3 == HIGH) {
+  	menucounter += 1;
+  	if(menucounter > 3){
+  		menucounter = 3;
+  	}
+  	
+  	else{
+       display.setCursor(0,35);//for debug 
+
+   
+  	  array_botoes[menucounter][0] = 1;
+  		array_botoes[menucounter][1] = 0;
+  
+  		array_botoes[(menucounter - 1)][0] = 0;
+  		array_botoes[(menucounter - 1)][1] = 1;
+      
+
+    }  
+  
+  }
+    
+   //definitions for initial colors in the display
+  vword = array_botoes[3][1];//these are the equivalent to black and white to the word colors and the back light color 
+  vback = array_botoes[3][0];  
+
+  aword = array_botoes[2][1];
+  aback = array_botoes[2][0];
+
+  irword = array_botoes[1][1];
+  irback = array_botoes[1][0];
+
+  rfword = array_botoes[0][1];
+  rfback = array_botoes[0][0];  
+
   display.clearDisplay();
 
   // Display Text
-  display.setTextSize(1); //0    1
+  display.setTextSize(1); 
   display.setTextColor(rfword, rfback);
   display.setCursor(0,0);
   display.println("RF");
   display.display();
  
 
-  // Display Inverted Text 1     0
-  display.setTextColor(irword, irback); // 'inverted' text
+  display.setTextColor(irword, irback); 
   display.setCursor(0,9);
   display.println("INFRA RED");
   display.display();
   
-   // Display Inverted Text
-  display.setTextColor(aword, aback); // 'inverted' text
+
+  display.setTextColor(aword, aback); 
   display.setCursor(0,18);
   display.println("ALARM");
   display.display();
  
-   // Display Inverted Text
-  display.setTextColor(vword, vback); // 'inverted' text 1 is white and 0 is black 
+
+  display.setTextColor(vword, vback); 
   display.setCursor(0,27);
   display.println("VOLTAGE");
   display.display();
@@ -156,9 +159,14 @@ if (menucounter > 3 || menucounter < 0){
   display.display();
   delay(2000);
   display.clearDisplay();
-  
-  display.clearDisplay();
-  
-  
+
+ 
+    
+    
+    if (buttonState2 == HIGH) { 
+    //selct a menu
   }
+  
+  
+  
 }
