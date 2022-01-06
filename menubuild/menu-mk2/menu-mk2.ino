@@ -38,6 +38,10 @@ int array_botoes2[2][2] = {
   {1,0},
   {0,1}
 };
+int array_botoes3[2][2] = {
+ {1,0},
+ {0,1}
+};
 
 const int buttonPin1 = 2;  //decrements menucounter
 const int buttonPin2 = 3; // selects the menu 
@@ -81,84 +85,135 @@ void pagina_1(){
   display.println("VOLTAGE");
   display.display();
 
-  display.setCursor(0,35);//for debug 
+  display.setCursor(0,40);//for debug 
   display.print(menucounter, DEC);
   display.println("(DEC)");
   display.display();
   delay(2000);
  
 
-  }
-void muda_array_Drecrese(){
-  array_botoes[menucounter][0] = 1;
-  array_botoes[menucounter][1] = 0;
-  
-  array_botoes[(menucounter + 1)][0] = 0;
-  array_botoes[(menucounter +1)][1] = 1;
-  
-  }
+}
+void pagina_2(){
+  display.setTextSize(1); 
+  display.setTextColor(array_botoes2[0][1], array_botoes2[0][0]);
+  display.setCursor(0,0);
+  display.println("TRANSMIT  RF");
+  display.display();
+ 
 
-void muda_array_crese(){
-  
-      array_botoes[menucounter][0] = 1;
-      array_botoes[menucounter][1] = 0;
-  
-      array_botoes[(menucounter - 1)][0] = 0;
-      array_botoes[(menucounter - 1)][1] = 1;
-  
-  
-  
-  }
+  display.setTextColor(array_botoes2[1][1], array_botoes2[1][0]); 
+  display.setCursor(0,9);
+  display.println("RECIEVE  RF");
+  display.display();
+}
+void pagina_3(){
+  display.setTextSize(1); 
+  display.setTextColor(array_botoes3[0][1], array_botoes3[0][0]);
+  display.setCursor(0,0);
+  display.println("TRANSMIT IF");
+  display.display();
+ 
 
-    
-    
-   
-    
+  display.setTextColor(array_botoes3[1][1], array_botoes3[1][0]); 
+  display.setCursor(0,9);
+  display.println("RECIEVE IF");
+  display.display();
+}
+
+
+void muda_array_Drecrese(int testearray[4][2]){
+	testearray[menucounter][0] = 1;//selecionado
+	testearray[menucounter][1] = 0;
+
+	testearray[(menucounter + 1)][0] = 0;//nao selecionado
+	testearray[(menucounter +1)][1] = 1;
+		  
+}
+
+void muda_array_Crese(int testearray[4][2]){
+	testearray[menucounter][0] = 1;//selecionado
+	testearray[menucounter][1] = 0;
+	  
+	testearray[(menucounter - 1)][0] = 0;//nao selecionado
+	testearray[(menucounter - 1)][1] = 1;  
+}
+
+void decreseMenu(int array_teste1[4][2]){
+	display.clearDisplay();
+	menucounter -= 1;
+	if(menucounter < 0){//valor do menu nao pode ser menor que 0
+		menucounter = 0;
+	}
+	else{
+		muda_array_Drecrese(array_teste1);
+	}	  
+}
+
+void cresceMenu(int maximo,int array_teste1[4][2]){
+	display.clearDisplay();
+	menucounter += 1;
+	if(menucounter > maximo){//valor do menu nao pode ser maior que 3
+		menucounter = maximo;
+	}
+	else{
+		muda_array_Crese(array_teste1);
+	}  
+}
+void readbuttons(){
+	buttonState1 = digitalRead(buttonPin1);
+	buttonState2 = digitalRead(buttonPin2);
+	buttonState3 = digitalRead(buttonPin3);
+
+}
+
+void main_F(){
+	readbuttons();
+	if(buttonState1 == HIGH){
+		decreseMenu(array_botoes);	  
+	}
+	  
+	if (buttonState3 == HIGH){
+	cresceMenu(3,array_botoes);	
+	}	
+	    
+
+	pagina_1();
+
+	 
+	    
+	    
+	if (buttonState2 == HIGH){
+		display.clearDisplay();
+		if(menucounter == 0){
+			while(true){
+				readbuttons();
+				if(buttonState1 == HIGH){
+					decreseMenu(array_botoes2);	  
+				}
+				if (buttonState3 == HIGH){
+					cresceMenu(1,array_botoes2);	
+				}			
+				pagina_2();
+			}
+		}
+		
+	if(menucounter == 1){
+			while(true){
+				readbuttons();
+				if(buttonState1 == HIGH){
+					decreseMenu(array_botoes3);	  
+				}
+				if (buttonState3 == HIGH){
+					cresceMenu(1,array_botoes3);	
+				}			
+				pagina_3();
+			}
+	}
+}
+}	    
+	   
+	    
   
 void loop() {
-
-  
-  buttonState1 = digitalRead(buttonPin1);
-  buttonState2 = digitalRead(buttonPin2);
-  buttonState3 = digitalRead(buttonPin3);
-
-  if (buttonState1 == HIGH){
-     display.clearDisplay();
-    menucounter -= 1;
-  if (menucounter < 0){//valor do menu nao pode ser menor que 0
-    menucounter = 0;
-  }
-  
-  else{
-  muda_array_Drecrese();
-  
-  
-  }  
-    }
-  
-    if (buttonState3 == HIGH) {
-       display.clearDisplay();
-  	menucounter += 1;
-  	if(menucounter > 3){//valor do menu nao pode ser maior que 3
-  		menucounter = 3;
-  	}
-  	
-  	else{
-       
-      muda_array_crese();
-     
-    }  
-  
-  }
-    
-
-  pagina_1();
-
- 
-    
-    
-    if (buttonState2 == HIGH) {
-     
-        
-    }
+main_F();
 }
