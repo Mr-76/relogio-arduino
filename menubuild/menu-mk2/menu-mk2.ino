@@ -1,4 +1,4 @@
-
+  
 
 /*  other way of displayign the menu using fuctions and incremetation and decrementation
 theres a array conteaining the value 
@@ -34,6 +34,10 @@ int array_botoes[4][2] = {
   {0,1},
   {0,1}
 };
+int array_botoes2[2][2] = {
+  {1,0},
+  {0,1}
+};
 
 const int buttonPin1 = 2;  //decrements menucounter
 const int buttonPin2 = 3; // selects the menu 
@@ -48,56 +52,11 @@ void setup()
   // initialize with the I2C addr 0x3C
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  
 
-  // Clear the buffer.
+   display.clearDisplay();
 }
 
-
-
-void loop() {
-
+void pagina_1(){
   
-  buttonState1 = digitalRead(buttonPin1);
-  buttonState2 = digitalRead(buttonPin2);
-  buttonState3 = digitalRead(buttonPin3);
-
-  if (buttonState1 == HIGH) {
-    menucounter -= 1;
-  if (menucounter < 0){
-    menucounter = 0;
-  }
-  
-  else{
-  array_botoes[menucounter][0] = 1;
-  array_botoes[menucounter][1] = 0;
-  
-  array_botoes[(menucounter + 1)][0] = 0;
-  array_botoes[(menucounter +1)][1] = 1;
-  
-  }  
-    }
-  
-    if (buttonState3 == HIGH) {
-  	menucounter += 1;
-  	if(menucounter > 3){
-  		menucounter = 3;
-  	}
-  	
-  	else{
-       display.setCursor(0,35);//for debug 
-
-   
-  	  array_botoes[menucounter][0] = 1;
-  		array_botoes[menucounter][1] = 0;
-  
-  		array_botoes[(menucounter - 1)][0] = 0;
-  		array_botoes[(menucounter - 1)][1] = 1;
-      
-    }  
-  
-  }
-    
-
-  // Display Text
   display.setTextSize(1); 
   display.setTextColor(array_botoes[0][1], array_botoes[0][0]);
   display.setCursor(0,0);
@@ -127,15 +86,79 @@ void loop() {
   display.println("(DEC)");
   display.display();
   delay(2000);
-  display.clearDisplay();
+ 
+
+  }
+void muda_array_Drecrese(){
+  array_botoes[menucounter][0] = 1;
+  array_botoes[menucounter][1] = 0;
+  
+  array_botoes[(menucounter + 1)][0] = 0;
+  array_botoes[(menucounter +1)][1] = 1;
+  
+  }
+
+void muda_array_crese(){
+  
+      array_botoes[menucounter][0] = 1;
+      array_botoes[menucounter][1] = 0;
+  
+      array_botoes[(menucounter - 1)][0] = 0;
+      array_botoes[(menucounter - 1)][1] = 1;
+  
+  
+  
+  }
+
+    
+    
+   
+    
+  
+void loop() {
+
+  
+  buttonState1 = digitalRead(buttonPin1);
+  buttonState2 = digitalRead(buttonPin2);
+  buttonState3 = digitalRead(buttonPin3);
+
+  if (buttonState1 == HIGH){
+     display.clearDisplay();
+    menucounter -= 1;
+  if (menucounter < 0){//valor do menu nao pode ser menor que 0
+    menucounter = 0;
+  }
+  
+  else{
+  muda_array_Drecrese();
+  
+  
+  }  
+    }
+  
+    if (buttonState3 == HIGH) {
+       display.clearDisplay();
+  	menucounter += 1;
+  	if(menucounter > 3){//valor do menu nao pode ser maior que 3
+  		menucounter = 3;
+  	}
+  	
+  	else{
+       
+      muda_array_crese();
+     
+    }  
+  
+  }
+    
+
+  pagina_1();
 
  
     
     
-    if (buttonState2 == HIGH) { 
-    //selct a menu
-  }
-  
-  
-  
+    if (buttonState2 == HIGH) {
+     
+        
+    }
 }
