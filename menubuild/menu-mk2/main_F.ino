@@ -10,12 +10,10 @@ void main_F(){
 	    
 
 	pagina_1();
-
-	 
-	    
-	    
+   
 	if (buttonState2 == HIGH){
-		display.clearDisplay();
+		
+    display.clearDisplay();
 		if(menucounter == 0){
 			while(true){
 				readbuttons();
@@ -29,7 +27,7 @@ void main_F(){
 			}
 		}
 		
-	if(menucounter == 1){
+	  if(menucounter == 1){
 			while(true){
 				readbuttons();
 				if(buttonState1 == HIGH){
@@ -40,6 +38,21 @@ void main_F(){
 				}			
 				pagina_3();
 			}
-	}
+    }
+    
+    if(menucounter == 2){
+      int menuclock = 0;
+      while(true){
+        readbuttons();
+        if (buttonState1 == HIGH){
+          decreseMenu(array_botoes4);
+        }
+        
+        if (buttonState3 == HIGH){
+          cresceMenu(2,array_botoes4);
+        }
+        pagina_4();        
+      }
+    }
 }
 }	   

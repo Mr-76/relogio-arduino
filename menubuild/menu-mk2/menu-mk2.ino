@@ -29,6 +29,12 @@ int array_botoes3[2][2] = {
  {0,1}
 };
 
+int array_botoes4[3][2] = {
+ {1,0},
+ {0,1},
+ {0,1}
+};
+
 const int buttonPin1 = 2;  //decrements menucounter
 const int buttonPin2 = 3; // selects the menu 
 const int buttonPin3 = 4;  //increments menucounter
