@@ -20,6 +20,7 @@ void main_F(){
 		
     display.clearDisplay();
 		if(menupagina1 == 0){
+      int sai = 0;
 
 			while(true){
 				readbuttons();
@@ -28,12 +29,20 @@ void main_F(){
 				}
 				if (buttonState3 == HIGH){
 					cresceMenu(1,array_botoes2,menupagina2);	
-				}			
+				}
+        else{}	
 				pagina_2();
+        sai = sai_menu();
+        if(sai == 1){
+          break;
+        }
+        else{}
+        
 			}
 		}
 		
 	  if(menupagina1 == 1){
+      int sai = 0;
 			while(true){
 				readbuttons();
 				if(buttonState1 == HIGH){
@@ -43,10 +52,16 @@ void main_F(){
 					cresceMenu(1,array_botoes3,menupagina3);	
 				}			
 				pagina_3();
+        sai = sai_menu();
+        if(sai == 1){
+          break;
+        }
+        else{}
 			}
     }
     
     if(menupagina1 == 2){
+      int sai = 0;
       int menuclock = 0;
       while(true){
         readbuttons();
@@ -57,7 +72,12 @@ void main_F(){
         if (buttonState3 == HIGH){
           cresceMenu(2,array_botoes4,menupagina4);
         }
-        pagina_4();        
+        pagina_4();   
+        sai = sai_menu();
+        if(sai == 1){
+          break;
+        }
+        else{}     
       }
     }
 }

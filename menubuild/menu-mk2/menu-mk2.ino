@@ -18,12 +18,6 @@ int menupagina2 = 0;
 int menupagina3 = 0;
 int menupagina4 = 0;
 
-
-
-int a = *(&menupagina1);
-
-
-
 const int buttonPin1 = 2;  //decrements menucounter
 const int buttonPin2 = 3; // selects the menu 
 const int buttonPin3 = 4;  //increments menucounter
