@@ -1,4 +1,9 @@
-
+int array_botoes[4][2] = {
+  {1,0},
+  {0,1},
+  {0,1},
+  {0,1}
+};
 void pagina_1(){
   
   display.setTextSize(1); 

@@ -1,3 +1,7 @@
+#include "pagina1.h"
+#include "pagina2.h"
+#include "pagina3.h"
+#include "pagina4.h"
 void main_F(){
 	readbuttons();
 	if(buttonState1 == HIGH){
@@ -15,6 +19,7 @@ void main_F(){
 		
     display.clearDisplay();
 		if(menucounter == 0){
+
 			while(true){
 				readbuttons();
 				if(buttonState1 == HIGH){

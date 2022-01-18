@@ -1,3 +1,7 @@
+int array_botoes3[2][2] = {
+ {1,0},
+ {0,1}
+};
 void pagina_3(){
   display.setTextSize(1); 
   display.setTextColor(array_botoes3[0][1], array_botoes3[0][0]);
