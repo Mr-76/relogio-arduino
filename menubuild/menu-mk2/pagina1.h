@@ -32,7 +32,7 @@ void pagina_1(){
 
   display.setTextColor(1,0); 
   display.setCursor(0,40);//for debug 
-  display.print(menucounter, DEC);
+  display.print(menupagina1, DEC);
   display.println("(DEC)");
   display.display();
   delay(2000);

@@ -12,10 +12,15 @@
 int buttonState1 = 0;
 int buttonState2 = 0;
 int buttonState3 = 0;
-int menucounter = 0;
+
+int menupagina1 = 0;
+int menupagina2 = 0;
+int menupagina3 = 0;
+int menupagina4 = 0;
 
 
 
+int a = *(&menupagina1);
 
 
 
@@ -39,5 +44,6 @@ void setup()
 }
 
 void loop() {
+
 main_F();
 }

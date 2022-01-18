@@ -1,10 +1,10 @@
-void decreseMenu(int array_teste1[4][2]){
+void decreseMenu(int array_teste1[4][2],int &menu){
 	display.clearDisplay();
-	menucounter -= 1;
-	if(menucounter < 0){//valor do menu nao pode ser menor que 0
-		menucounter = 0;
+	menu -= 1;
+	if(menu < 0){//valor do menu nao pode ser menor que 0
+		menu = 0;
 	}
 	else{
-		muda_array_Drecrese(array_teste1);
+		muda_array_Drecrese(array_teste1,menu);
 	}	  
 }
