@@ -11,4 +11,3 @@ void pagina_5(){
   display.println("VOLTAGEM PROBES");
   display.display();
 }
-

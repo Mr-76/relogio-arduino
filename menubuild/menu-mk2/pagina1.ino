@@ -1,9 +1,3 @@
-int array_botoes[4][2] = {
-  {1,0},
-  {0,1},
-  {0,1},
-  {0,1}
-};
 void pagina_1(){
   
   display.setTextSize(1); 
@@ -39,8 +33,13 @@ void pagina_1(){
   display.println("VOLTAGE");
   display.display();
 
+  display.setTextColor(1, 0); 
+  display.setCursor(0,39);
+  display.println("GPS");
+  display.display();
+
   display.setTextColor(1,0); 
-  display.setCursor(0,40);//for debug 
+  display.setCursor(0,50);//for debug 
   display.print(menupagina1, DEC);
   display.println("(DEC)");
   display.display();

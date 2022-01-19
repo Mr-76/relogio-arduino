@@ -1,9 +1,3 @@
-int array_botoes4[3][2] = {
-{1,0},
-{0,1},
-{0,1}
-};
-
 void pagina_4(){
 
 display.setTextSize(1); 
@@ -32,4 +26,3 @@ display.println("(DEC)");
 display.display();
 delay(500);  
 }
-
