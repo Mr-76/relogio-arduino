@@ -40,10 +40,10 @@ void setup()
   // initialize with the I2C addr 0x3C
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  
 
-   display.clearDisplay();
+  display.clearDisplay();
 }
 
 void loop() {
 
-main_F();
+main_F();//roda toas as funcoes
 }

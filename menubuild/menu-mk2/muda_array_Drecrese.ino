@@ -1,3 +1,11 @@
+/* a funcao modifica o array em ordem decrescente
+modifica 1 o valor atual de  nao selecinado para  selecionado 
+e depois modifica o valor do posterior de  selecionado para nao selecionado
+lembrando na funcao display.setTextColor(x, y) x eh o back light e y as letras
+x = 0 backlight liga
+y = 1letra desliga
+*/
+
 void muda_array_Drecrese(int testearray[4][2],int &menu){
 	testearray[menu][0] = 1;//selecionado
 	testearray[menu][1] = 0;

@@ -11,7 +11,11 @@ void pagina_1(){
   display.setCursor(0,0);
   display.println("RF");
   display.display();
- 
+
+  display.setTextColor(1,0);
+  display.setCursor(10,2);
+  display.println("15:41");
+  display.display(); 
 
   display.setTextColor(array_botoes[1][1], array_botoes[1][0]); 
   display.setCursor(0,9);
