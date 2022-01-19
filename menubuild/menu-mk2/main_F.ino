@@ -6,7 +6,7 @@
 void main_F(){
 	readbuttons();//le os botoes
 	
-  if(buttonState1 == HIGH){
+  	if(buttonState1 == HIGH){
 		decreseMenu(array_botoes,menupagina1);	//decrementa o seletor do menu 
 	}
 	  
@@ -19,7 +19,8 @@ void main_F(){
    
 	if (buttonState2 == HIGH){
 		
-    display.clearDisplay();//limpa o display
+		display.clearDisplay();//limpa o display
+		
 		if(menupagina1 == 0){
 
 			while(true){
@@ -31,6 +32,10 @@ void main_F(){
 					cresceMenu(1,array_botoes2,menupagina2);	
 				}			
 				pagina_2();//mostra a 2 pagina
+				
+				if(readexit()){
+					break;
+				}
 			}
 		}
 		
@@ -44,6 +49,10 @@ void main_F(){
 					cresceMenu(1,array_botoes3,menupagina3);	
 				}			
 				pagina_3();//mostra a 3 pagina
+				
+				if(readexit()){
+					break;
+				}
 			}
     }
     
@@ -59,7 +68,10 @@ void main_F(){
           cresceMenu(2,array_botoes4,menupagina4);
         }
         pagina_4();  //mostra a 4 pagina      
-      }
+      	if (readexit()){
+			    break;
+	}
+	}
     }
     if (menupagina1 == 3){
       display.clearDisplay();
