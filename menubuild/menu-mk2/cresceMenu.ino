@@ -1,3 +1,5 @@
+/*   decresce o array com um valor maximo  == a 0 pois se for menor que 0 o elemento no array nao exite*/
+
 void cresceMenu(int maximo,int array_teste1[4][2],int &menu){
 	display.clearDisplay();
 	menu += 1;
@@ -5,6 +7,6 @@ void cresceMenu(int maximo,int array_teste1[4][2],int &menu){
 		menu = maximo;
 	}
 	else{
-		muda_array_Crese(array_teste1,menu);
+		muda_array_Crese(array_teste1,menu);// o array cresce
 	}  
 }

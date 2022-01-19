@@ -2,25 +2,27 @@
 #include "pagina2.h"
 #include "pagina3.h"
 #include "pagina4.h"
+#include "pagina5.h"
 void main_F(){
-	readbuttons();
+	readbuttons();//le os botoes
 	
-  if(buttonState1 == HIGH){
-		decreseMenu(array_botoes,menupagina1);	  
+  	if(buttonState1 == HIGH){
+		decreseMenu(array_botoes,menupagina1);	//decrementa o seletor do menu 
 	}
 	  
 	if (buttonState3 == HIGH){
-	  cresceMenu(3,array_botoes,menupagina1);	
+	  cresceMenu(3,array_botoes,menupagina1);	//incrementa o seletor do menu
 	}	
 	    
 
-	pagina_1();
+	pagina_1();//mostra a 1 pagina
    
 	if (buttonState2 == HIGH){
 		
-    display.clearDisplay();
+		display.clearDisplay();//limpa o display
+		
 		if(menupagina1 == 0){
-      int sai = 0;
+      
 
 			while(true){
 				readbuttons();
@@ -29,20 +31,18 @@ void main_F(){
 				}
 				if (buttonState3 == HIGH){
 					cresceMenu(1,array_botoes2,menupagina2);	
+				}			
+				pagina_2();//mostra a 2 pagina
+				
+				if(readexit()){
+					break;
 				}
-        else{}	
-				pagina_2();
-        sai = sai_menu();
-        if(sai == 1){
-          break;
-        }
-        else{}
-        
+
 			}
 		}
 		
 	  if(menupagina1 == 1){
-      int sai = 0;
+     
 			while(true){
 				readbuttons();
 				if(buttonState1 == HIGH){
@@ -51,18 +51,16 @@ void main_F(){
 				if (buttonState3 == HIGH){
 					cresceMenu(1,array_botoes3,menupagina3);	
 				}			
-				pagina_3();
-        sai = sai_menu();
-        if(sai == 1){
-          break;
-        }
-        else{}
+				pagina_3();//mostra a 3 pagina
+				
+				if(readexit()){
+					break;
+				}
+
 			}
     }
     
     if(menupagina1 == 2){
-      int sai = 0;
-      int menuclock = 0;
       while(true){
         readbuttons();
         if (buttonState1 == HIGH){
@@ -71,14 +69,20 @@ void main_F(){
         
         if (buttonState3 == HIGH){
           cresceMenu(2,array_botoes4,menupagina4);
-        }
-        pagina_4();   
-        sai = sai_menu();
-        if(sai == 1){
-          break;
-        }
-        else{}     
+        }  
+        pagina_4();  //mostra a 4 pagina      
+      	if (readexit()){
+			    break;
+	      }
+	}
+    }
+    if (menupagina1 == 3){
+      display.clearDisplay();
+      while(true){
+      readbuttons();
+      pagina_5();
+
       }
     }
 }
-}	   
+}
