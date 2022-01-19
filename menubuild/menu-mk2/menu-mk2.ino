@@ -39,5 +39,6 @@ void setup()
 
 void loop() {
 
-main_F();//roda toas as funcoes
+main_F();
+display.display();//roda toas as funcoes
 }
