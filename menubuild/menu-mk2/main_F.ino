@@ -3,7 +3,7 @@
 #include "pagina3.h"
 #include "pagina4.h"
 #include "pagina5.h"
-void main_F(){
+void main_F(String horas,int day,int month,int year){
 	readbuttons();//le os botoes
 	
   	if(buttonState1 == HIGH){
@@ -15,7 +15,7 @@ void main_F(){
 	}	
 	    
 
-	pagina_1();//mostra a 1 pagina
+	pagina_1(horas,day,month,year);//mostra a 1 pagina
    
 	if (buttonState2 == HIGH){
 		

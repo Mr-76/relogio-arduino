@@ -1,10 +1,11 @@
+
 int array_botoes[4][2] = {
   {1,0},
   {0,1},
   {0,1},
   {0,1}
 };
-void pagina_1(){
+void pagina_1(String horas,int day,int month,int year){
   
   display.setTextSize(1); 
   display.setTextColor(array_botoes[0][1], array_botoes[0][0]);
@@ -14,12 +15,22 @@ void pagina_1(){
 
   display.setTextColor(1,0);
   display.setCursor(90,2);
-  display.println("15:41");
+  display.println(horas);
   display.display();
 
   display.setTextColor(1,0);
   display.setCursor(80,14);
-  display.println("19/01/22");
+  display.println(day,DEC);
+  display.display();
+  
+  display.setTextColor(1,0);
+  display.setCursor(90,14);
+  display.println(month,DEC);
+  display.display();
+
+  display.setTextColor(1,0);
+  display.setCursor(100,14);
+  display.println(year,DEC);
   display.display(); 
 
   display.setTextColor(array_botoes[1][1], array_botoes[1][0]); 
