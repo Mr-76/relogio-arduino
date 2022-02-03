@@ -11,44 +11,44 @@ void pagina_1(String horas,int day,int month,int year){
   display.setTextColor(array_botoes[0][1], array_botoes[0][0]);
   display.setCursor(0,0);
   display.println("RF");
-  display.display();
+   
 
   display.setTextColor(1,0);
   display.setCursor(90,2);
   display.println(horas);
-  display.display();
+   
 
   display.setTextColor(1,0);
   display.setCursor(80,14);
   display.println(day,DEC);
-  display.display();
+   
   
   display.setTextColor(1,0);
   display.setCursor(90,14);
   display.println(month,DEC);
-  display.display();
+   
 
   display.setTextColor(1,0);
   display.setCursor(100,14);
   display.println(year,DEC);
-  display.display(); 
+    
 
   display.setTextColor(array_botoes[1][1], array_botoes[1][0]); 
   display.setCursor(0,9);
   display.println("INFRA RED");
-  display.display();
+   
   
 
   display.setTextColor(array_botoes[2][1], array_botoes[2][0]); 
   display.setCursor(0,18);
   display.println("ALARM");
-  display.display();
+   
  
 
   display.setTextColor(array_botoes[3][1], array_botoes[3][0]); 
   display.setCursor(0,27);
   display.println("VOLTAGE");
-  display.display();
+   
 
   display.setTextColor(1,0); 
   display.setCursor(0,40);//for debug 

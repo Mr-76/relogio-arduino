@@ -3,7 +3,6 @@ void pagina_5(){
   display.setTextColor(1, 0);
   display.setCursor(0,0);
   display.println("VOLTAGEM BATERIA");
-  display.display();
  
 
   display.setTextColor(1, 0); 
