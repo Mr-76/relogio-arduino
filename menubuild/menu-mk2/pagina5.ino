@@ -9,5 +9,6 @@ void pagina_5(){
   display.setCursor(0,20);
   display.println("VOLTAGEM PROBES");
   display.display();
+  delay(500); 
 }
 

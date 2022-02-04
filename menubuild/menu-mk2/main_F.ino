@@ -2,8 +2,8 @@
 #include "pagina2.h"
 #include "pagina3.h"
 #include "pagina4.h"
-#include "pagina5.h"
-void main_F(String horas,int day,int month,int year){
+
+void main_F(String horas,int time[3]){
 	readbuttons();//le os botoes
 	
   	if(buttonState1 == HIGH){
@@ -15,11 +15,11 @@ void main_F(String horas,int day,int month,int year){
 	}	
 	    
 
-	pagina_1(horas,day,month,year);//mostra a 1 pagina
+	pagina_1(horas,time);//mostra a 1 pagina
    
 	if (buttonState2 == HIGH){
 		
-		display.clearDisplay();//limpa o display
+		//display.clearDisplay();//limpa o display
 		
 		if(menupagina1 == 0){
       
@@ -81,7 +81,9 @@ void main_F(String horas,int day,int month,int year){
       while(true){
       readbuttons();
       pagina_5();
-
+      if (readexit()){
+			    break;
+	      }
       }
     }
 }

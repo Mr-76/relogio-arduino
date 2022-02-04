@@ -27,6 +27,8 @@ const int buttonPin1 = 2;  //decrements menucounter
 const int buttonPin2 = 3; // selects the menu 
 const int buttonPin3 = 4;  //increments menucounter
 
+int time[] = {0,0,0};
+
 String hora;
 String minutos; 
 String horas;
@@ -66,8 +68,11 @@ void loop() {
 	minutos = String(now.minute());
 	horas = hora + ":" + minutos;
 
-  
+  time[0] = now.day();
+  time[1] = now.month();
+  time[2] = now.year();
+   
 	
 
-main_F(horas,now.day(),now.month(),now.year());//roda todas as funcoes
+main_F(horas,time);//roda todas as funcoes
 }
