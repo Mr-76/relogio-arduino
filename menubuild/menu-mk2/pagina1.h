@@ -21,13 +21,20 @@ void pagina_1(String horas,int day,int month,int year){
   display.setTextColor(1,0);
   display.setCursor(80,14);
   display.println(day,DEC);
+  
+  display.setTextColor(1,0);
+  display.setCursor(85,14);
+  display.println("/");
    
   
   display.setTextColor(1,0);
-  display.setCursor(90,14);
+  display.setCursor(91,14);
   display.println(month,DEC);
    
-
+  display.setTextColor(1,0);
+  display.setCursor(96,14);
+  display.println("/");
+   
   display.setTextColor(1,0);
   display.setCursor(100,14);
   display.println(year,DEC);
