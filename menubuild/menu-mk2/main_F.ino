@@ -1,7 +1,4 @@
-#include "pagina1.h"
-#include "pagina2.h"
-#include "pagina3.h"
-#include "pagina4.h"
+#include "arrays_paginas.h"
 
 void main_F(String horas,int time[3]){
 	readbuttons();//le os botoes
