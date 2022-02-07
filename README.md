@@ -6,3 +6,4 @@ Criando um relogio com um arduino
 - [ ] https://github.com/holand76/relogio-arduino/issues/7
 - [ ] #3
 - [ ] https://github.com/holand76/relogio-arduino/issues/3
+- [ ] https://github.com/holand76/relogio-arduino/issues/11
