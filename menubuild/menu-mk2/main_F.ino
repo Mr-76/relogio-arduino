@@ -11,7 +11,7 @@ void main_F(String horas,int time[3]){
 	}
 	  
 	if (buttonState3 == HIGH){
-	  cresceMenu(3,array_botoes,menupagina1);	//incrementa o seletor do menu
+	  cresceMenu(4,array_botoes,menupagina1);	//incrementa o seletor do menu
 	}	
 	    
 
@@ -84,6 +84,17 @@ void main_F(String horas,int time[3]){
       if (readexit()){
 			    break;
 	      }
+      }
+    }
+    if (menupagina1 == 4){
+      display.clearDisplay();
+      while(true){
+      readbuttons();
+      pagina_6();
+      if (readexit()){
+			    break;
+	      }
+
       }
     }
 }

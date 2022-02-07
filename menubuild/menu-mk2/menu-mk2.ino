@@ -62,17 +62,16 @@ void setup()
 }
 
 void loop() {
-  DateTime now = rtc.now();
- 
+	DateTime now = rtc.now();
+
 	hora = String(now.hour());
 	minutos = String(now.minute());
 	horas = hora + ":" + minutos;
+	time[0] = now.day();
+	time[1] = now.month();
+	time[2] = now.year();
 
-  time[0] = now.day();
-  time[1] = now.month();
-  time[2] = now.year();
-   
-	
 
-main_F(horas,time);//roda todas as funcoes
+
+	main_F(horas,time);//roda todas as funcoes
 }

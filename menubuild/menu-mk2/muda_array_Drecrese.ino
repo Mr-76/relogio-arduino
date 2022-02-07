@@ -7,6 +7,7 @@ y = backlight back light = 0 back light apaga
 */
 
 void muda_array_Drecrese(int testearray[4][2],int &menu){
+  
 	testearray[menu][0] = 1;//selecionado
 	testearray[menu][1] = 0;
 
