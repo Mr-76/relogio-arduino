@@ -8,6 +8,11 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include "RTClib.h"  
+#include <string.h>
+
+RTC_DS1307 rtc;
+
 
 int buttonState1 = 0;
 int buttonState2 = 0;
@@ -22,11 +27,30 @@ const int buttonPin1 = 2;  //decrements menucounter
 const int buttonPin2 = 3; // selects the menu 
 const int buttonPin3 = 4;  //increments menucounter
 
+int time[] = {0,0,0};
+
+String hora;
+String minutos; 
+String horas;
+
+
 Adafruit_SSD1306 display(-1);
 
+String str=String(10);
 
 void setup()   
-{          
+{
+   Serial.begin(9600);
+  if (!rtc.begin()) {
+    while (1);
+  }
+
+  if (!rtc.isrunning()) {
+   // rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+
+  }
+   
+  //rtc.adjust(DateTime(2022, 2, 3, 15, 15, 0));
   pinMode(buttonPin1, INPUT);
   pinMode(buttonPin2, INPUT);
   pinMode(buttonPin3, INPUT);
@@ -38,7 +62,16 @@ void setup()
 }
 
 void loop() {
+	DateTime now = rtc.now();
 
-main_F();
-display.display();//roda toas as funcoes
+	hora = String(now.hour());
+	minutos = String(now.minute());
+	horas = hora + ":" + minutos;
+	time[0] = now.day();
+	time[1] = now.month();
+	time[2] = now.year();
+
+
+
+	main_F(horas,time);//roda todas as funcoes
 }
