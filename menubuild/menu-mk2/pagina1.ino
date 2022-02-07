@@ -13,17 +13,17 @@ void pagina_1(String horas,int time[3]){
    
 
   display.setTextColor(1,0);
-  display.setCursor(80,14);
+  display.setCursor(80,18);
   display.println(time[0],DEC);
    
   
   display.setTextColor(1,0);
-  display.setCursor(90,14);
+  display.setCursor(90,18);
   display.println(time[1],DEC);
    
 
   display.setTextColor(1,0);
-  display.setCursor(100,14);
+  display.setCursor(100,18);
   display.println(time[2],DEC);
     
 
@@ -44,10 +44,17 @@ void pagina_1(String horas,int time[3]){
   display.println("VOLTAGE");
    
 
+
+
+  display.setTextColor(array_botoes[4][1], array_botoes[4][0]);  
+  display.setCursor(0,39);
+  display.println("GPS");
+
+
+
   display.setTextColor(1,0); 
-  display.setCursor(0,40);//for debug 
+  display.setCursor(0,50);//for debug 
   display.print(menupagina1, DEC);
-  display.println("(DEC)");
   display.display();
   delay(500);
 
