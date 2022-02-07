@@ -6,7 +6,6 @@ void pagina_1(String horas,int time[3]){
   display.setCursor(0,0);
   display.println("RF");
    
-
   display.setTextColor(1,0);
   display.setCursor(90,2);
   display.println(horas);
@@ -30,25 +29,33 @@ void pagina_1(String horas,int time[3]){
   display.setTextColor(array_botoes[1][1], array_botoes[1][0]); 
   display.setCursor(0,9);
   display.println("INFRA RED");
-   
+  
   
 
   display.setTextColor(array_botoes[2][1], array_botoes[2][0]); 
   display.setCursor(0,18);
   display.println("ALARM");
    
- 
+  
 
-  display.setTextColor(array_botoes[3][1], array_botoes[3][0]); 
+  
+display.setTextColor(array_botoes[3][1], array_botoes[3][0]); 
   display.setCursor(0,27);
   display.println("VOLTAGE");
    
 
-  display.setTextColor(1,0); 
-  display.setCursor(0,40);//for debug 
+  
+
+  display.setTextColor(array_botoes[4][1], array_botoes[4][0]);  
+  display.setCursor(0,40);
+  display.println("GPS");
+
+   display.setTextColor(1,0); 
+  display.setCursor(0,60);//for debug 
   display.print(menupagina1, DEC);
   display.println("(DEC)");
-  display.display();
-  delay(500);
+
+ 
+delay(500); 
 
 }
