@@ -45,9 +45,9 @@ uint16_t ssAddress = 0xBF00;
 uint8_t ssCommand = 0x3;
 uint8_t ssRepeats = 1;
 
-//uint16_t ssAddress = 0x707;
-//uint8_t ssCommand = 0x2;
-//uint8_t ssRepeats = 1;
+uint16_t ssAddress = 0x707;
+uint8_t ssCommand = 0x2;
+uint8_t ssRepeats = 1;
 
  
 void loop () {
