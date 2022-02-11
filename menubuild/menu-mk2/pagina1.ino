@@ -18,7 +18,7 @@ void pagina_1(int time[3]){
    
 
   display.setTextColor(1,0);
-  display.setCursor(80,18);
+  display.setCursor(75,18);
   display.println(time[0],DEC);
    
   

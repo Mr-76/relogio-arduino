@@ -46,11 +46,11 @@ void setup()
   }
 
   if (!rtc.isrunning()) {
-   // rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+    rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
 
   }
    
-  //rtc.adjust(DateTime(2022, 2, 3, 15, 15, 0));
+  //rtc.adjust(DateTime(2022, 2, 11, 16, 40, 0));
   pinMode(buttonPin1, INPUT);
   pinMode(buttonPin2, INPUT);
   pinMode(buttonPin3, INPUT);
