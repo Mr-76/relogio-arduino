@@ -1,5 +1,5 @@
 
-void pagina_1(String horas,int time[3]){
+void pagina_1(int time[3]){
   
   display.setTextSize(1); 
   display.setTextColor(array_botoes[0][1], array_botoes[0][0]);
@@ -10,10 +10,15 @@ void pagina_1(String horas,int time[3]){
   display.setTextColor(1,0);
   display.setCursor(90,2);
   display.println(horas);
+
+  display.setTextColor(1,0);
+  display.setCursor(110,2);
+  display.println(minutos);
+   
    
 
   display.setTextColor(1,0);
-  display.setCursor(80,18);
+  display.setCursor(75,18);
   display.println(time[0],DEC);
    
   

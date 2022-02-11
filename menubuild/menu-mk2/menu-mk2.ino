@@ -29,7 +29,7 @@ const int buttonPin3 = 4;  //increments menucounter
 
 int time[] = {0,0,0};
 
-String hora;
+
 String minutos; 
 String horas;
 
@@ -46,11 +46,11 @@ void setup()
   }
 
   if (!rtc.isrunning()) {
-   // rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+    rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
 
   }
    
-  //rtc.adjust(DateTime(2022, 2, 3, 15, 15, 0));
+  //rtc.adjust(DateTime(2022, 2, 11, 16, 40, 0));
   pinMode(buttonPin1, INPUT);
   pinMode(buttonPin2, INPUT);
   pinMode(buttonPin3, INPUT);
@@ -63,16 +63,13 @@ void setup()
 
 void loop() {
   DateTime now = rtc.now();
- 
-	hora = String(now.hour());
+  
+	horas = String(now.hour());
 	minutos = String(now.minute());
-	horas = hora + ":" + minutos;
-
+  
   time[0] = now.day();
   time[1] = now.month();
   time[2] = now.year();
    
-	
-
-main_F(horas,time);//roda todas as funcoes
+  main_F(time);//roda todas as funcoes
 }
