@@ -18,6 +18,8 @@ int buttonState1 = 0;
 int buttonState2 = 0;
 int buttonState3 = 0;
 
+int array_alarme []= {0,0,0,0};
+
 int menupagina1 = 0;
 int menupagina2 = 0;
 int menupagina3 = 0;
@@ -72,4 +74,19 @@ void loop() {
   time[2] = now.year();
    
   main_F(time);//roda todas as funcoes
+  
+  if(array_alarme[0]==1){
+         if((array_alarme[1]== now.hour())  && (array_alarme[2] == now.minute()) && (array_alarme[3] == now.second())){
+              		array_alarme[0] = 0;
+              		//buzzer on
+              		display.clearDisplay();
+              		display.setTextSize(2);
+              		display.setTextColor(1,0);
+              		display.setCursor(10,18);
+              		display.println("ALARMMMMMMM!");
+              		delay(2000);
+                  display.clearDisplay();
+                  display.display();
+	}
+  }
 }
