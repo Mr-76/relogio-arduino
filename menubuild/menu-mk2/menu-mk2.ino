@@ -18,7 +18,8 @@ int buttonState1 = 0;
 int buttonState2 = 0;
 int buttonState3 = 0;
 
-int array_alarme []= {0,0,0,0};
+int array_alarme [] = {0,0,0,0};
+int array_timer_down [] = {0,0,0};
 
 int menupagina1 = 0;
 int menupagina2 = 0;
@@ -72,7 +73,7 @@ void loop() {
   time[0] = now.day();
   time[1] = now.month();
   time[2] = now.year();
-  
+  Serial.println(now.second());
   main_F(time);//roda todas as funcoes
   
   if(array_alarme[0]==1){
