@@ -61,6 +61,7 @@ void main_F(int time[3]){
     }
     
     if(menupagina1 == 2){
+      display.clearDisplay();
       while(true){
         readbuttons();
         if (buttonState1 == HIGH){
@@ -71,10 +72,12 @@ void main_F(int time[3]){
           cresceMenu(2,array_botoes4,menupagina4);
         }  
         if(buttonState2 == HIGH){
+          if(menupagina4 == 0){
+
           display.clearDisplay();
-          display.setTextSize(1); 
+          display.setTextSize(2); 
           display.setTextColor(1,0);
-          display.setCursor(10,50);
+          display.setCursor(37,20);
           display.println("ALARM MENU");
           display.display();
           delay(5000);//impedir falso input
@@ -83,12 +86,14 @@ void main_F(int time[3]){
          // array_alarme[1] = now.day();
          // array_alarme[2] = now.minute();
          // array_alarme[3] = now.second();
-		  display.clearDisplay();
+		      display.clearDisplay();
+
 			for(int i = 1;i< sizeof(array_alarme)/(sizeof(array_alarme[0]));i++){
+        display.clearDisplay();//limpar mensagem NEXT
 				while(true){
-					//delay(200);
+					
 					readbuttons();
-           display.setTextSize(2); 
+          display.setTextSize(2); 
 				
 					display.setTextColor(1,0);
 					display.setCursor(10,18);
@@ -101,7 +106,7 @@ void main_F(int time[3]){
 					display.setTextColor(1,0);
 					display.setCursor(100,18);
 					display.println(array_alarme[3],DEC);
-					display.display();
+					
 
           display.setTextSize(1); 
           display.setTextColor(1,0);
@@ -118,10 +123,9 @@ void main_F(int time[3]){
 
 					if(buttonState2 == HIGH){
             display.clearDisplay();
-            display.clearDisplay();
             display.setTextSize(2); 
             display.setTextColor(1,0);
-            display.setCursor(50,50);
+            display.setCursor(40,25);
             display.println("NEXT");
             display.display();
             delay(2000);
@@ -129,6 +133,8 @@ void main_F(int time[3]){
 					}
 				}
 			}
+      }
+      display.clearDisplay();
 			array_alarme[0] = 1;
 	}
 		
@@ -137,8 +143,8 @@ void main_F(int time[3]){
       	if (readexit()){
 			    break;
 	      }
-	}
-    }
+	  }
+  }
     if (menupagina1 == 3){
       display.clearDisplay();
       while(true){

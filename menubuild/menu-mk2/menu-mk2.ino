@@ -72,7 +72,7 @@ void loop() {
   time[0] = now.day();
   time[1] = now.month();
   time[2] = now.year();
-   
+  
   main_F(time);//roda todas as funcoes
   
   if(array_alarme[0]==1){
