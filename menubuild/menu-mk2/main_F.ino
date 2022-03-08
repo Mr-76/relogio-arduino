@@ -71,169 +71,29 @@ void main_F(int time[3]){
         if (buttonState3 == HIGH){
           cresceMenu(2,array_botoes4,menupagina4);
         }  
-      if(buttonState2 == HIGH){
-
+        if(buttonState2 == HIGH){
+ 
         if(menupagina4 == 0){
-          // dps adicionar valores defaut de horas como as do momento
-          //ex: sao 15:30:20 -- displaty do alarme deixa modificar a partir
-          //desse valor
-          display.clearDisplay();
-          display.setTextSize(2); 
-          display.setTextColor(1,0);
-          display.setCursor(37,20);
-          display.println("ALARM MENU");
-          display.display();
-          delay(5000);//impedir falso input
-
-          
-         // array_alarme[1] = now.day();
-         // array_alarme[2] = now.minute();
-         // array_alarme[3] = now.second();
-		      display.clearDisplay();
-
-			    for(int i = 1;i< sizeof(array_alarme)/(sizeof(array_alarme[0]));i++){
-          display.clearDisplay();//limpar mensagem NEXT
-          while(true){
-            
-            readbuttons();
-            display.setTextSize(2); 
-          
-            display.setTextColor(1,0);
-            display.setCursor(10,18);
-            display.println(array_alarme[1],DEC);
-            
-            display.setTextColor(1,0);
-            display.setCursor(50,18);
-            display.println(array_alarme[2],DEC);
-              
-            display.setTextColor(1,0);
-            display.setCursor(100,18);
-            display.println(array_alarme[3],DEC);
-            
-
-            display.setTextSize(1); 
-            display.setTextColor(1,0);
-            display.setCursor(10,50);
-            display.println(i,DEC);
-            display.display();
-            
-            if(buttonState1 == HIGH){
-              array_alarme[i] += 1;
-            }	
-            if(buttonState3 == HIGH){
-              array_alarme[i] -= 1;	
-            }			
-
-            if(buttonState2 == HIGH){
-              display.clearDisplay();
-              display.setTextSize(2); 
-              display.setTextColor(1,0);
-              display.setCursor(40,25);
-              display.println("NEXT");
-              display.display();
-              delay(2000);
-              break;
-					}
-				}
-			  }
+          //liga alarme
+         set_alarme();
         }
         if(menupagina4 == 1){
-          int seconds = 0;
-          display.clearDisplay();
-          while(true){
-            readbuttons();
-            display.setTextSize(1);
-            display.setTextColor(1,0);
-            display.setCursor(50,18);
-            display.println(seconds,DEC);
-            display.display();
-            seconds++;
-            delay(600);
-
-            
-            if (readexit()){
-			        break;
-	          }
-          }
-
+          timer_up();
         }
         if (menupagina4 == 2){
-          display.clearDisplay();
-          delay(1000);
-
-			    for(int i = 0;i< sizeof(array_timer_down)/(sizeof(array_timer_down[0]));i++){
-          display.clearDisplay();//limpar mensagem NEXT
-          while(true){
-            
-            readbuttons();
-            display.setTextSize(2); 
-          
-            display.setTextColor(1,0);
-            display.setCursor(10,18);
-            display.println(array_timer_down[0],DEC);
-            
-            display.setTextColor(1,0);
-            display.setCursor(50,18);
-            display.println(array_timer_down[1],DEC);
-              
-            display.setTextColor(1,0);
-            display.setCursor(100,18);
-            display.println(array_timer_down[2],DEC);
-            
-
-            display.setTextSize(1); 
-            display.setTextColor(1,0);
-            display.setCursor(10,50);
-            display.println(i,DEC);
-            display.display();
-            
-            if(buttonState1 == HIGH){
-              array_timer_down[i] += 1;
-            }	
-            if(buttonState3 == HIGH){
-              array_timer_down[i] -= 1;	
-            }			
-
-            if(buttonState2 == HIGH){
-              display.clearDisplay();
-              display.setTextSize(2); 
-              display.setTextColor(1,0);
-              display.setCursor(40,25);
-              display.println("NEXT");
-              display.display();
-              delay(2000);
-              break;
-					}
-				}
-			  }
-        display.clearDisplay();
-        int segundos = 0;
-        segundos = (array_timer_down[0]*360) + (array_timer_down[1] * 60) + array_timer_down[2];
-        while(true){
-          readbuttons();
-          display.setTextSize(2); 
-          display.setTextColor(1,0);
-          display.setCursor(40,25);
-          display.println(segundos,DEC);
-          display.display();
-          segundos--;
-          delay(1000);
-          if (readexit()){
-			      break;
-	        }
-        }
-
+          timer_down();
+  
         }
       }
       
 
 		
-	pagina_4();
-	  //mostra a 4 pagina      
+	    pagina_4();
+	    //mostra a 4 pagina      
       	if (readexit()){
 			    break;
 	      }
-	  }
+	    }
   }
     if (menupagina1 == 3){
       display.clearDisplay();
