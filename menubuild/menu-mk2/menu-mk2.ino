@@ -13,12 +13,13 @@
 
 RTC_DS1307 rtc;
 
-
+const int buzzer = 9; 
 int buttonState1 = 0;
 int buttonState2 = 0;
 int buttonState3 = 0;
 
-int array_alarme []= {0,0,0,0};
+int array_alarme [] = {0,0,0,0};//primeiro elemento dizsobre ligardo ou nao o alarme o resto sao as horas minutos e segundos
+int array_timer_down [] = {0,0,0};
 
 int menupagina1 = 0;
 int menupagina2 = 0;
@@ -42,6 +43,8 @@ String str=String(10);
 
 void setup()   
 {
+  pinMode(buzzer, OUTPUT); // Set buzzer - pin 9 as an output
+
    Serial.begin(9600);
   if (!rtc.begin()) {
     while (1);
@@ -64,6 +67,7 @@ void setup()
 }
 
 void loop() {
+  
   DateTime now = rtc.now();
   
 	horas = String(now.hour());
@@ -72,21 +76,19 @@ void loop() {
   time[0] = now.day();
   time[1] = now.month();
   time[2] = now.year();
-  
+  Serial.println(now.second());
+
   main_F(time);//roda todas as funcoes
   
   if(array_alarme[0]==1){
          if((array_alarme[1]== now.hour())  && (array_alarme[2] == now.minute()) && (array_alarme[3] == now.second())){
-              		array_alarme[0] = 0;
-              		//buzzer on
-              		display.clearDisplay();
-              		display.setTextSize(2);
-              		display.setTextColor(1,0);
-              		display.setCursor(10,18);
-              		display.println("ALARMMMMMMM!");
-              		delay(2000);
-                  display.clearDisplay();
-                  display.display();
-	}
+
+              	  for (int i = 0;i<4;i++){
+                  tone(buzzer, 1000); // Send 1KHz sound signal...
+                  delay(1000);        // ...for 1 sec
+                  noTone(buzzer);     // Stop sound...
+                  delay(1000); 
+                  }
+	        }
   }
 }
