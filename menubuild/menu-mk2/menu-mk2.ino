@@ -11,6 +11,9 @@
 #include "RTClib.h"  
 #include <string.h>
 
+Adafruit_SSD1306 display(-1);
+
+
 RTC_DS1307 rtc;
 
 const int buzzer = 9; 
@@ -37,12 +40,13 @@ String minutos;
 String horas;
 
 
-Adafruit_SSD1306 display(-1);
+
 
 String str=String(10);
 
 void setup()   
 {
+  
   pinMode(buzzer, OUTPUT); // Set buzzer - pin 9 as an output
 
    Serial.begin(9600);
@@ -83,11 +87,11 @@ void loop() {
   if(array_alarme[0]==1){
          if((array_alarme[1]== now.hour())  && (array_alarme[2] == now.minute()) && (array_alarme[3] == now.second())){
 
-              	  for (int i = 0;i<4;i++){
+              	  for (int i = 0;i<100;i++){
                   tone(buzzer, 1000); // Send 1KHz sound signal...
-                  delay(1000);        // ...for 1 sec
+                  delay(100);        // ...for 1 sec
                   noTone(buzzer);     // Stop sound...
-                  delay(1000); 
+                  delay(100); 
                   }
 	        }
   }

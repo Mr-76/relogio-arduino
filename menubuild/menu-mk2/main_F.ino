@@ -1,5 +1,5 @@
 #include "pagina1.h"
-#include "pagina2.h"
+
 #include "pagina3.h"
 #include "pagina4.h"
 
@@ -27,13 +27,25 @@ void main_F(int time[3]){
 			while(true){
 				readbuttons();
 				if(buttonState1 == HIGH){
-					decreseMenu(array_botoes2,menupagina2);	  
+					decreseMenu(array_botoes4,menupagina2);	  
 				}
 				if (buttonState3 == HIGH){
-					cresceMenu(1,array_botoes2,menupagina2);	
+					cresceMenu(2,array_botoes4,menupagina2);	
 				}			
 				pagina_2();//mostra a 2 pagina
 				
+				if(buttonState2 == HIGH){
+					if(menupagina2 == 0){
+					//transmit
+					
+					}
+					if(menupagina2 == 1){
+					//recieve
+					}
+					if(menupagina2 == 2){
+					//repeatLisen
+					}
+				}	
 				if(readexit()){
 					break;
 				}
