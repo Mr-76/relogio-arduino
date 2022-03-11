@@ -3,8 +3,11 @@
 Criando um relogio com um arduino
  
 
-- [ ] https://github.com/Mr-76/relogio-arduino/issues/7
-- [x] https://github.com/Mr-76/relogio-arduino/issues/11
+- [ ] RF
+- [ ] IF
+- [ ] GPS
+- [x] Volts
+- [x] alarme
 <div>
 <p>Using<p/>
 <img src = "https://img.shields.io/badge/Adafruit%20SSD%201306-v--2.5.0-yelllow"/>
