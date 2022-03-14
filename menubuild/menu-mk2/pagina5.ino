@@ -1,7 +1,13 @@
 void pagina_5(){
   
 	int sensorValue = analogRead(A0);
+
 	while(true){
+    readbuttons();
+    if (readexit()){
+			    break;
+	  }
+    sensorValue = analogRead(A0);
 		float voltage= sensorValue * (5.0 / 1023.0);
 		display.setTextSize(1); 
 		display.setTextColor(1, 0);

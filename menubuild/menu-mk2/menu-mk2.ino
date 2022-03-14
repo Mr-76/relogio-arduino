@@ -4,19 +4,20 @@
 //display.oled_command(SSD1305_DISPLAYON);
 
 
+
 #include <SPI.h>
+#include <string.h>
 #include <Wire.h>
+#include <RCSwitch.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
-#include "RTClib.h"  
-#include <string.h>
-
-Adafruit_SSD1306 display(-1);
+#include <RTClib.h>
 
 
 RTC_DS1307 rtc;
 
-const int buzzer = 9; 
+Adafruit_SSD1306 display(-1);
+
 int buttonState1 = 0;
 int buttonState2 = 0;
 int buttonState3 = 0;
@@ -42,12 +43,13 @@ String horas;
 
 
 
+
 String str=String(10);
 
 void setup()   
 {
   
-  pinMode(buzzer, OUTPUT); // Set buzzer - pin 9 as an output
+  // Set buzzer - pin 9 as an output
 
    Serial.begin(9600);
   if (!rtc.begin()) {
@@ -86,13 +88,7 @@ void loop() {
   
   if(array_alarme[0]==1){
          if((array_alarme[1]== now.hour())  && (array_alarme[2] == now.minute()) && (array_alarme[3] == now.second())){
-
-              	  for (int i = 0;i<100;i++){
-                  tone(buzzer, 1000); // Send 1KHz sound signal...
-                  delay(100);        // ...for 1 sec
-                  noTone(buzzer);     // Stop sound...
-                  delay(100); 
-                  }
+              	  buzzer_up();
 	        }
   }
 }
