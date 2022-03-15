@@ -8,8 +8,8 @@
 #include <SPI.h>
 #include <string.h>
 #include <Wire.h>
-#include <RCSwitch.h>
-#include <Adafruit_GFX.h>
+//#include <RCSwitch.h>
+//#include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include <RTClib.h>
 
@@ -17,6 +17,8 @@
 RTC_DS1307 rtc;
 
 Adafruit_SSD1306 display(-1);
+
+
 
 int buttonState1 = 0;
 int buttonState2 = 0;
@@ -40,15 +42,17 @@ int time[] = {0,0,0};
 String minutos; 
 String horas;
 
+//RCSwitch mySwitch = RCSwitch();
 
 
 
 
-String str=String(10);
+
 
 void setup()   
 {
   
+ // mySwitch.enableTransmit(10);
   // Set buzzer - pin 9 as an output
 
    Serial.begin(9600);
@@ -57,7 +61,7 @@ void setup()
   }
 
   if (!rtc.isrunning()) {
-    rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+    //rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
 
   }
    

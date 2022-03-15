@@ -1,4 +1,3 @@
-
 void pagina_1(int time[3]){
   
   display.setTextSize(1); 

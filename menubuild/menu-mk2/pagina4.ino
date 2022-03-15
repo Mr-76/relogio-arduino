@@ -1,20 +1,20 @@
 
-void pagina_4(){
+void pagina_4(int array_botoes[5][2]){
 
 display.setTextSize(1); 
-display.setTextColor(array_botoes4[0][1], array_botoes4[0][0]);
+display.setTextColor(array_botoes[0][1], array_botoes[0][0]);
 display.setCursor(0,0);
 display.println("ALARM");
  ;
 
 
-display.setTextColor(array_botoes4[1][1], array_botoes4[1][0]); 
+display.setTextColor(array_botoes[1][1], array_botoes[1][0]); 
 display.setCursor(0,9);
 display.println("TIMER_UP");
  ;
 
 
-display.setTextColor(array_botoes4[2][1], array_botoes4[2][0]); 
+display.setTextColor(array_botoes[2][1], array_botoes[2][0]); 
 display.setCursor(0,18);
 display.println("TIMER_DOWN");
  ;
