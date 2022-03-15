@@ -1,36 +1,17 @@
-#include "pagina1.h"
-#include "pagina3.h"
-#include "pagina4.h"
 
-int array_botoes[5][2] = {
-  {1,0},
-  {0,1},
-  {0,1},
-  {0,1},
-  {0,1}
-};
 
-int  inicializa_array_local(){
-  static int array_botoe[5][2] = {
-          {1,0},
-          {0,1},
-          {0,1},
-          {0,1},
-          {0,1}
-        };
-        return array_botoe;
 
-      }
+
 void main_F(int time[3]){
-
+  
 	readbuttons();//le os botoes
 	
   	if(buttonState1 == HIGH){
-		decreseMenu(array_botoes,menupagina1);	//decrementa o seletor do menu 
+		decreseMenu(array_botoess,menupagina1);	//decrementa o seletor do menu 
 	}
 	  
 	if (buttonState3 == HIGH){
-	  cresceMenu(4,array_botoes,menupagina1);	//incrementa o seletor do menu
+	  cresceMenu(4,array_botoess,menupagina1);	//incrementa o seletor do menu
 	}	
 	    
 

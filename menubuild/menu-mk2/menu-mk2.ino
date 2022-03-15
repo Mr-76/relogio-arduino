@@ -44,6 +44,13 @@ String horas;
 
 //RCSwitch mySwitch = RCSwitch();
 
+int array_botoess[5][2] = {
+  {1,0},
+  {0,1},
+  {0,1},
+  {0,1},
+  {0,1}
+};
 
 
 
