@@ -1,0 +1,78 @@
+
+Main
+association Menu
+---
+---
+---
+
+Menu
+composes RadioMenu
+composes InfraRedMenu
+composes ClockMenu
+composes ServerMenu
+composes TaskMenu
+composes KickMenu
+
+---
+- radioMenu: RadioMenu
+- infraRedMenu: InfraRedMenu
+- clockMenu:ClockMenu
+- serverMenu:ServerMenu
+- taskMenu:TaskMenu
+- kickMenu: KickMenu
+---
++ Menu()
++ ativaMenuR(botao:int):void
++ ativaMenuInfra(botao:int):void
++ ativaMenuClock(botao:int):void
++ ativaMenuServer(botao:int):void
++ ativaMenuTask(botao:int):void
++ ativaMenuKick(botao:int):void
+---
+RadioMenu
+---
+---
++ RadioMenu()
++ sendCodigo():void
++ reciveCodigo():void
++ copyCodigo():void
++ copyRepeat():void
+---
+
+InfraRedMenu
+---
+---
++ InfraRedMenu()
++ sendCodigo():void
++ reciveCodigo():void
++ copyCodigo():void
++ copyRepeat():void
+---
+
+ClockMenu
+---
+---
++ criaAlarme():void
++ criaCronometro():void
++ criaRegressivo():void
+---
+
+
+ServerMenu
+---
+---
++ ServerMenu()
++ defineCodigos():void //define codigos para os IR e RF.
++ defineCodigoRF():void
++ defineCodigoIR():void
+---
+
+
+KickMenu
+---
+---
++ KickMenu()
++ kickSelected():void
++ kickAll():void
+---
+
