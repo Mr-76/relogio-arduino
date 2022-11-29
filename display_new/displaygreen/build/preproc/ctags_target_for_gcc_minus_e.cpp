@@ -1,11 +1,12 @@
-#include <LiquidCrystal_I2C.h>
+# 1 "/home/cremoso/git/relogio-arduino/display_new/displaygreen/displaygreen.ino"
+# 2 "/home/cremoso/git/relogio-arduino/display_new/displaygreen/displaygreen.ino" 2
 //future change each menu to an object....
 //need to change the menu cases instead of if to switch and case.
-LiquidCrystal_I2C lcd(0x27,16,2);  // set the LCD address to 0x3F for a 16 chars and 2 line display
+LiquidCrystal_I2C lcd(0x27,16,2); // set the LCD address to 0x3F for a 16 chars and 2 line display
 
 const int BUTTON1 = 8;
-const int BUTTON2 = 7;  
-const int BUTTON3 = 6;  
+const int BUTTON2 = 7;
+const int BUTTON3 = 6;
 
 int button1State = 0;
 int button2State = 0;
@@ -19,19 +20,14 @@ char *array_menus[] = {
   "CLOCK", "RADIO FREQ", "INFRA RED","nothing"
 };
 
-char *clock_menus[] = {
-  "ALARM", "COUNTER", "CRONOMETER","nothing"
-};
-
-
 
 //set up starts display and also the input buttons
 void setup() {
-  pinMode(BUTTON1, INPUT);
-  pinMode(BUTTON2, INPUT);
-  pinMode(BUTTON3, INPUT);
+  pinMode(BUTTON1, 0x0);
+  pinMode(BUTTON2, 0x0);
+  pinMode(BUTTON3, 0x0);
   lcd.init();
-  lcd.clear();         
+  lcd.clear();
   lcd.backlight();
 }
 
@@ -39,15 +35,15 @@ void setup() {
 void loop() {
   get_buttons_states();//receive buttons states
   decrease_increase_menu(); //testing if buttons are being pressed
- 
+  limit_menu();//limitar valor do menu
   selection_menu();//menu selection
   show_options();
 }
 
 //shows the menus options to display
-void  show_options(){
+void show_options(){
        lcd.setCursor(0,0);
-       lcd.clear(); 
+       lcd.clear();
        lcd.print(array_menus[menu_selector]);
        lcd.setCursor(2,1);//x,y
        lcd.print(menu_selector);
@@ -64,28 +60,28 @@ void get_buttons_states(){
 //menu of selections,change to swich and case style..
 void selection_menu(){
   get_buttons_states();
-  if (button2State == HIGH){
+  if (button2State == 0x1){
     if (menu_selector == 0) {
          lcd.setCursor(0,0);
-         lcd.clear();  
+         lcd.clear();
          lcd.print("menu_selecionado");
          delay(1000);
          clock_menu();
   }else if (menu_selector == 1){
          lcd.setCursor(0,0);
-         lcd.clear();  
+         lcd.clear();
          lcd.print("menu_selecionado");
          delay(1000);
          radio_freq_menu();
-    
+
   }else if (menu_selector == 2){
           lcd.setCursor(0,0);
-          lcd.clear();  
+          lcd.clear();
          lcd.print("menu_selecionado");
          delay(1000);
 
     infra_red_menu();
-    
+
   }else{
     ;
   }
@@ -94,30 +90,25 @@ void selection_menu(){
 
 //change the menu control variable
 void decrease_increase_menu(){
-  if (button1State == HIGH) {
+  if (button1State == 0x1) {
        lcd.setCursor(0,0);
-       lcd.clear(); 
+       lcd.clear();
        lcd.print("buttom1 pressed");
        delay(1000);
-    
-       menu_selector--;
-    	
-       limit_menu();
 
-   
+       menu_selector--;
+
        lcd.setCursor(2,1);
        lcd.print(menu_selector);
-       
-       
-  }else  if (button3State == HIGH) {
+
+
+  }else if (button3State == 0x1) {
        lcd.setCursor(0,0);
-       lcd.clear();  
+       lcd.clear();
        lcd.print("buttom3 pressed");
        delay(1000);
        menu_selector++;
-      limit_menu();
-   
-    
+
         lcd.setCursor(2,1);
         lcd.print(menu_selector);
   }
@@ -138,7 +129,20 @@ void limit_menu(){
 }
 
 //clock menu impl
-
+void clock_menu(){
+ get_buttons_states();
+ decrease_increase_menu();
+ lcd.clear();
+ lcd.setCursor(0,0);
+ lcd.print("clock menu");
+  while (button2State == 0x0){
+    get_buttons_states();
+  }
+  lcd.clear();
+ lcd.setCursor(0,0);
+ lcd.print("exiting clock");
+ delay(1000);
+}
 
 //radio freq menu impl
 void radio_freq_menu(){
@@ -147,7 +151,7 @@ void radio_freq_menu(){
  lcd.clear();
  lcd.setCursor(0,0);
  lcd.print("freq menu");
-  while (button2State == LOW){
+  while (button2State == 0x0){
     get_buttons_states();
   }
   lcd.clear();
@@ -158,17 +162,13 @@ void radio_freq_menu(){
 
 //infra red menu impl
 void infra_red_menu(){
-menu_selector = 0;
  get_buttons_states();
  decrease_increase_menu();
  lcd.clear();
  lcd.setCursor(0,0);
  lcd.print("infra red menu");
-  while (button2State == LOW){
+  while (button2State == 0x0){
     get_buttons_states();
-    
-    decrease_increase_menu();
-
   }
   lcd.clear();
  lcd.setCursor(0,0);

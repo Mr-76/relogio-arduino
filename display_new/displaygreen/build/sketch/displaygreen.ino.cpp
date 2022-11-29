@@ -1,3 +1,5 @@
+#include <Arduino.h>
+#line 1 "/home/cremoso/git/relogio-arduino/display_new/displaygreen/displaygreen.ino"
 #include <LiquidCrystal_I2C.h>
 //future change each menu to an object....
 //need to change the menu cases instead of if to switch and case.
@@ -19,13 +21,29 @@ char *array_menus[] = {
   "CLOCK", "RADIO FREQ", "INFRA RED","nothing"
 };
 
-char *clock_menus[] = {
-  "ALARM", "COUNTER", "CRONOMETER","nothing"
-};
-
-
 
 //set up starts display and also the input buttons
+#line 24 "/home/cremoso/git/relogio-arduino/display_new/displaygreen/displaygreen.ino"
+void setup();
+#line 34 "/home/cremoso/git/relogio-arduino/display_new/displaygreen/displaygreen.ino"
+void loop();
+#line 43 "/home/cremoso/git/relogio-arduino/display_new/displaygreen/displaygreen.ino"
+void show_options();
+#line 53 "/home/cremoso/git/relogio-arduino/display_new/displaygreen/displaygreen.ino"
+void get_buttons_states();
+#line 60 "/home/cremoso/git/relogio-arduino/display_new/displaygreen/displaygreen.ino"
+void selection_menu();
+#line 91 "/home/cremoso/git/relogio-arduino/display_new/displaygreen/displaygreen.ino"
+void decrease_increase_menu();
+#line 120 "/home/cremoso/git/relogio-arduino/display_new/displaygreen/displaygreen.ino"
+void limit_menu();
+#line 131 "/home/cremoso/git/relogio-arduino/display_new/displaygreen/displaygreen.ino"
+void clock_menu();
+#line 147 "/home/cremoso/git/relogio-arduino/display_new/displaygreen/displaygreen.ino"
+void radio_freq_menu();
+#line 163 "/home/cremoso/git/relogio-arduino/display_new/displaygreen/displaygreen.ino"
+void infra_red_menu();
+#line 24 "/home/cremoso/git/relogio-arduino/display_new/displaygreen/displaygreen.ino"
 void setup() {
   pinMode(BUTTON1, INPUT);
   pinMode(BUTTON2, INPUT);
@@ -39,7 +57,7 @@ void setup() {
 void loop() {
   get_buttons_states();//receive buttons states
   decrease_increase_menu(); //testing if buttons are being pressed
- 
+  limit_menu();//limitar valor do menu
   selection_menu();//menu selection
   show_options();
 }
@@ -101,9 +119,6 @@ void decrease_increase_menu(){
        delay(1000);
     
        menu_selector--;
-    	
-       limit_menu();
-
    
        lcd.setCursor(2,1);
        lcd.print(menu_selector);
@@ -115,9 +130,7 @@ void decrease_increase_menu(){
        lcd.print("buttom3 pressed");
        delay(1000);
        menu_selector++;
-      limit_menu();
-   
-    
+       
         lcd.setCursor(2,1);
         lcd.print(menu_selector);
   }
@@ -138,7 +151,20 @@ void limit_menu(){
 }
 
 //clock menu impl
-
+void clock_menu(){
+ get_buttons_states();
+ decrease_increase_menu();
+ lcd.clear();
+ lcd.setCursor(0,0);
+ lcd.print("clock menu");
+  while (button2State == LOW){
+    get_buttons_states();
+  }
+  lcd.clear();
+ lcd.setCursor(0,0);
+ lcd.print("exiting clock");
+ delay(1000);
+}
 
 //radio freq menu impl
 void radio_freq_menu(){
@@ -158,7 +184,6 @@ void radio_freq_menu(){
 
 //infra red menu impl
 void infra_red_menu(){
-menu_selector = 0;
  get_buttons_states();
  decrease_increase_menu();
  lcd.clear();
@@ -166,12 +191,10 @@ menu_selector = 0;
  lcd.print("infra red menu");
   while (button2State == LOW){
     get_buttons_states();
-    
-    decrease_increase_menu();
-
   }
   lcd.clear();
  lcd.setCursor(0,0);
  lcd.print("exiting infra");
  delay(1000);
 }
+
