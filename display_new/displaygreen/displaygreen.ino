@@ -2,6 +2,9 @@
 //future change each menu to an object....
 //need to change the menu cases instead of if to switch and case.
 LiquidCrystal_I2C lcd(0x27, 16, 2);  // set the LCD address to 0x3F for a 16 chars and 2 line display
+#include "LED.h"
+
+LED ledd(2);
 
 const int BUTTON1 = 8;
 const int BUTTON2 = 7;

@@ -24,6 +24,17 @@ void clock_menu() {
       delay(1000);
       //apos isso fica tudo sem nd no display:()
       if (menu_selector == 0) {
+
+
+	 //testar bloco de codigo prox vez
+         lcd.clear();
+         get_buttons_states();
+         decrease_increase_menu();
+         lcd.setCursor(0, 0);
+         lcd.print("TEST");
+         delay(1000);
+
+
         lcd.clear();
         lcd.setCursor(0, 0);
         lcd.print("entrando");
