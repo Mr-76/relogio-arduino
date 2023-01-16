@@ -44,9 +44,9 @@ void clock_menu() {
   delay(1000);
 }
 
-bool exit_test(){
+bool exit_test() {
   get_buttons_states();
-  delay(700); //to not press too much
+  delay(700);  //to not press too much
   return ((button3State == HIGH && button1State == HIGH));
 }
 
@@ -58,24 +58,45 @@ void alarmMennu() {
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("ALARMEEEE");
+  int hora = alarm_timing / 3600;
+  int minutos = ((alarm_timing) % 3600) / 60;
+  int segundos = alarm_timing % 60;
+
+  int time_array[3] = { hora, minutos, segundos };
   delay(1000);
-  while (true) {
+  for (int i = 0; i < 3; i++) {
     get_buttons_states();
-    lcd.clear();
-    delay(1000);
-    //calculando horas
-    int hora = alarm_timing / 3600;
-    int minutos = ((alarm_timing) % 3600)/60;
-    int segundos = alarm_timing % 60;
-    lcd.setCursor(0, 0);
-    lcd.print(hora);
-    lcd.setCursor(3,0);
-    lcd.print(minutos);
-    lcd.setCursor(6,0);
-    lcd.print(segundos);
-    delay(1000);
-    if (exit_test()){
-      break;
+    while (true) {
+      get_buttons_states();
+      lcd.clear();
+      delay(500);
+      if (button1State == HIGH) {
+        time_array[i]--;
+      }
+      if (button3State == HIGH) {
+        time_array[i]++;
+      }
+      if (button2State == HIGH) {
+        lcd.clear();
+        lcd.print("NEXT");
+        delay(700);
+        break;
+      }
+      lcd.setCursor(0, 0);
+      lcd.print(time_array[0]);
+      lcd.setCursor(3, 0);
+      lcd.print(time_array[1]);
+      lcd.setCursor(6, 0);
+      lcd.print(time_array[2]);
+      delay(500);
     }
   }
+
+  current_alarm = (time_array[0]) * 3600 + (time_array[1]) * 60 + (time_array[2]);
+}
+
+void check_clock() {
+  //  if ( current_alarm != 0){
+  //    if (rtc seconds == current_alarmseconds)
+  //  }
 }

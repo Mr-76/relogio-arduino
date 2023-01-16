@@ -14,6 +14,8 @@ int button1State = 0;
 int button2State = 0;
 int button3State = 0;
 
+int current_alarm = 0;
+
 int menu_selector = 0;
 
 int menu_array[10];
@@ -40,9 +42,10 @@ void setup() {
 
 //loop where the program starts
 void loop() {
-  get_buttons_states();//receive buttons states
-  selection_menu();  //menu selection
+  get_buttons_states();  //receive buttons states
+  selection_menu();      //menu selection
   show_options();
+  check_clock();
 }
 
 //shows the menus options to display

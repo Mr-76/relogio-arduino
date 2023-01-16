@@ -8,14 +8,18 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 let s:shortmess_save = &shortmess
-set shortmess=aoO
-badd +0 clock.ino
+if &shortmess =~ 'A'
+  set shortmess=aoOA
+else
+  set shortmess=aoO
+endif
+badd +60 clock.ino
 argglobal
 %argdel
 $argadd clock.ino
 edit clock.ino
 argglobal
-setlocal fdm=indent
+setlocal fdm=expr
 setlocal fde=GetJavaFold(v:lnum)
 setlocal fmr={{{,}}}
 setlocal fdi=#
@@ -23,14 +27,12 @@ setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-29
-normal! zo
-let s:l = 29 - ((21 * winheight(0) + 23) / 46)
+let s:l = 97 - ((36 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 29
-normal! 02|
+keepjumps 97
+normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
