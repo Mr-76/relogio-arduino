@@ -40,9 +40,7 @@ void setup() {
 
 //loop where the program starts
 void loop() {
-  get_buttons_states();      //receive buttons states
-  decrease_increase_menu();  //testing if buttons are being pressed
-
+  get_buttons_states();//receive buttons states
   selection_menu();  //menu selection
   show_options();
 }
@@ -62,6 +60,9 @@ void get_buttons_states() {
   button1State = digitalRead(BUTTON1);
   button2State = digitalRead(BUTTON2);
   button3State = digitalRead(BUTTON3);
+
+
+  decrease_increase_menu();  //testing if buttons are being pressed
 }
 
 //menu of selections,change to swich and case style..
@@ -102,16 +103,11 @@ void decrease_increase_menu() {
     lcd.clear();
     lcd.print("buttom1 pressed");
     delay(1000);
-
     menu_selector--;
-
     limit_menu();
-
-
     lcd.setCursor(2, 1);
     lcd.print(menu_selector);
     delay(500);
-
     lcd.clear();
 
 
@@ -122,8 +118,6 @@ void decrease_increase_menu() {
     delay(1000);
     menu_selector++;
     limit_menu();
-
-
     lcd.setCursor(2, 1);
     lcd.print(menu_selector);
     delay(500);
