@@ -1,16 +1,22 @@
-# relogio-arduino
+# Relógio Arduino
 
-Criando um relogio com um arduino
- 
+## Descrição
 
-- [ ] RF
-- [ ] IF
-- [ ] GPS
-- [x] Volts
-- [x] alarme
-<div>
-<p>Using<p/>
-<img src = "https://img.shields.io/badge/Adafruit%20SSD%201306-v--2.5.0-yelllow"/>
-<img src = "https://img.shields.io/badge/RTClib-2.0.2-yelllow"/>
-<img src = "https://img.shields.io/badge/Adafruit%20GFX-1.10.12-yelllow"/>
-<div/>
+Criando um relógio com um Arduino que inclui as seguintes funcionalidades:
+
+- GPS
+- RTC (Relógio de Tempo Real)
+- Alarme
+- Timer de contagem regressiva
+- Cronômetro
+- Módulo RF para abrir o portão RC do prédio
+- Laser
+
+Este projeto foi um teste para integrar várias funcionalidades em um relógio baseado em Arduino.
+Fotos.... XD
+
+
+<p align="center">
+  <img src="imagens/c11ad00c-323f-4a5f-9a4e-dd3f62ce5b9e.jpeg" alt="Imagem 1" width="300"/>
+  <img src="imagens/dde34908-3af0-437e-a37c-9ae7b175d0bc.jpeg" alt="Imagem 2" width="300"/>
+</p>
